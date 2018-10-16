@@ -1,0 +1,16 @@
+{
+  "name": "development-monorepo",
+  "private": true,
+  "scripts": {
+    "d:generator": "yarn workspace azgaars-map-generator start",
+    "d:service": "yarn workspace map-share-service dev",
+    "dev": "concurrently -n g,s npm:d:generator npm:d:service"
+  },
+  "workspaces": [
+    "map-share-service",
+    "azgaars-map-generator"
+  ],
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  }
+}
