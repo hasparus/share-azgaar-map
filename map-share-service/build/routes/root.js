@@ -69,8 +69,10 @@ var rootHandler = function (req, res) { return __awaiter(_this, void 0, void 0, 
                 return [4 /*yield*/, Promise.all(maps.map(function (file) { return makeMapUrl(file.path_lower); }))];
             case 2:
                 mapUrls = _a.sent();
-                res.end("\n    <div style=\"display: flex; flex-direction: column; font-family: monospace\">\n      " + maps.map(function (file, index) { return "<a href=\"" + mapUrls[index] + "\">" + file.path_lower + "</a>"; }) + "\n    </div>\n  ");
-                return [2 /*return*/];
+                return [2 /*return*/, maps.map(function (file, index) { return ({
+                        path: file.path_lower || '?',
+                        temporaryLink: mapUrls[index],
+                    }); })];
         }
     });
 }); };

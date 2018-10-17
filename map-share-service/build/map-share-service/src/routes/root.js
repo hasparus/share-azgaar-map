@@ -34,15 +34,48 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
-var routes_1 = require("./routes");
-var handler = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+var isomorphic_fetch_1 = __importDefault(require("isomorphic-fetch"));
+var dropbox_1 = require("dropbox");
+var DROPBOX_ACCESS_TOKEN = process.env.DROPBOX_ACCESS_TOKEN;
+var dbx = new dropbox_1.Dropbox({ accessToken: DROPBOX_ACCESS_TOKEN, fetch: isomorphic_fetch_1.default });
+function makeMapUrl(path) {
+    return __awaiter(this, void 0, void 0, function () {
+        var link;
+        return __generator(this, function (_a) {
+            switch (_a.label) {
+                case 0: return [4 /*yield*/, dbx.filesGetTemporaryLink({
+                        path: path,
+                    })];
+                case 1:
+                    link = (_a.sent()).link;
+                    return [2 /*return*/, "http://localhost:5000/?maplink=" + encodeURIComponent(link)];
+            }
+        });
+    });
+}
+var rootHandler = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
+    var files, maps, mapUrls;
     return __generator(this, function (_a) {
-        if (req.url === '/') {
-            return [2 /*return*/, routes_1.rootHandler(req, res)];
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, dbx.filesListFolder({ path: '' })];
+            case 1:
+                files = (_a.sent()).entries;
+                maps = files.filter(function (file) { return file.name.match('.map'); });
+                return [4 /*yield*/, Promise.all(maps.map(function (file) { return makeMapUrl(file.path_lower); }))];
+            case 2:
+                mapUrls = _a.sent();
+                return [2 /*return*/, {
+                        maps: maps.map(function (file, index) { return ({
+                            path: file.path_lower || '?',
+                            temporaryLink: mapUrls[index],
+                        }); }),
+                    }];
         }
-        return [2 /*return*/, req.url];
     });
 }); };
-exports.default = handler;
+exports.default = rootHandler;

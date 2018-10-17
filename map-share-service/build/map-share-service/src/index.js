@@ -34,9 +34,14 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 var _this = this;
 Object.defineProperty(exports, "__esModule", { value: true });
 var routes_1 = require("./routes");
+var micro_cors_1 = __importDefault(require("micro-cors"));
+var corsMiddleware = micro_cors_1.default();
 var handler = function (req, res) { return __awaiter(_this, void 0, void 0, function () {
     return __generator(this, function (_a) {
         if (req.url === '/') {
@@ -45,4 +50,4 @@ var handler = function (req, res) { return __awaiter(_this, void 0, void 0, func
         return [2 /*return*/, req.url];
     });
 }); };
-exports.default = handler;
+exports.default = corsMiddleware(handler);

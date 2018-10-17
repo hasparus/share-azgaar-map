@@ -1,0 +1,67 @@
+$blue: #29339b;
+$yellow: #fefe3b;
+
+html {
+  background: #eeeeee;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body {
+  background: $yellow;
+  color: black;
+  padding: 1em;
+  width: 80vw;
+  min-height: 300px;
+
+  font-family: 'PT Mono', monospace;
+  font-size: 20px;
+  position: relative;
+}
+
+h1 {
+  font-weight: normal;
+}
+
+a {
+  color: black;
+  font-family: inherit;
+
+  &:hover {
+    color: $blue;
+  }
+}
+
+button {
+  border: 2px black solid;
+  padding: 0.6em 1.2em;
+  font-family: inherit;
+  font-size: inherit;
+  margin: 1em 0;
+  background: $yellow;
+  color: black;
+  box-shadow: 6px 5px 0 0 black;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    box-shadow: 1px 1px 0 0 black;
+  }
+}
+
+.maps-grid {
+  display: flex;
+  flex-direction: row;
+  > * {
+    padding: 1em;
+    border: 0px dashed black;
+    border-right-width: 1px;
+    &:last-child {
+      border-right-width: 0px;
+    }
+  }
+}
