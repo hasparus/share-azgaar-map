@@ -458,10 +458,12 @@ function app(state, actions, view, container) {
     return element;
   }
 }
-},{}],"../../map-share-common/urls.ts":[function(require,module,exports) {
+},{}],"../../map-share-common/urls.js":[function(require,module,exports) {
 "use strict";
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 var urls;
 
 if ("development" !== 'production') {
@@ -478,7 +480,7 @@ if ("development" !== 'production') {
 
 exports.GENERATOR_URL = urls.GENERATOR_URL;
 exports.SERVICE_URL = urls.SERVICE_URL;
-},{}],"../../map-share-common/index.ts":[function(require,module,exports) {
+},{}],"../../map-share-common/index.js":[function(require,module,exports) {
 "use strict";
 
 function __export(m) {
@@ -487,10 +489,12 @@ function __export(m) {
   }
 }
 
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
 
 __export(require("./urls"));
-},{"./urls":"../../map-share-common/urls.ts"}],"../../node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./urls":"../../map-share-common/urls.js"}],"../../node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -2033,7 +2037,7 @@ if ("development" !== 'production') {
 }
 
 main.getMaps();
-},{"hyperapp":"../../node_modules/hyperapp/src/index.js","../../map-share-common":"../../map-share-common/index.ts","./styles.scss":"styles.scss","hyperapp-redux-devtools":"../../node_modules/hyperapp-redux-devtools/index.js"}],"../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js","../../map-share-common":"../../map-share-common/index.js","./styles.scss":"styles.scss","hyperapp-redux-devtools":"../../node_modules/hyperapp-redux-devtools/index.js"}],"../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2060,7 +2064,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52672" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56262" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

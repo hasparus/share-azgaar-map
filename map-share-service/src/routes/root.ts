@@ -1,11 +1,7 @@
 import { RequestHandler } from 'micro';
-import fetch from 'isomorphic-fetch';
-import { Dropbox } from 'dropbox';
-
-const { DROPBOX_ACCESS_TOKEN } = process.env;
-const dbx = new Dropbox({ accessToken: DROPBOX_ACCESS_TOKEN, fetch });
 
 import { Map, GENERATOR_URL } from '../../../map-share-common';
+import dbx from '../peripherals/dropbox';
 
 async function makeMapUrl(path: string) {
   const { link } = await dbx.filesGetTemporaryLink({
@@ -17,7 +13,10 @@ async function makeMapUrl(path: string) {
 type RootResult = {
   maps: Map[];
 };
-const rootHandler: RequestHandler = async (req, res): Promise<RootResult> => {
+export const rootHandler: RequestHandler = async (
+  req,
+  res
+): Promise<RootResult> => {
   const { entries: files } = await dbx.filesListFolder({ path: '' });
 
   const maps = files.filter(file => file.name.match('.map'));
@@ -32,5 +31,3 @@ const rootHandler: RequestHandler = async (req, res): Promise<RootResult> => {
     })),
   };
 };
-
-export default rootHandler;
