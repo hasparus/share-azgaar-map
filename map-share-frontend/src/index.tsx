@@ -1,8 +1,6 @@
 import { h, app, Component, View } from 'hyperapp';
-import { Map } from '../../map-share-common';
+import { Map, SERVICE_URL } from '../../map-share-common';
 import './styles.scss';
-
-const SERVICE_URL = 'http://localhost:3000/';
 
 const Maps: Component<{ maps: Map[] }> = ({ maps }) => (
   <section>
@@ -65,12 +63,15 @@ const actions = {
 
 type Actions = typeof actions;
 
-const view: View<State, Actions> = (state, actions) => (
-  <section>
-    <Maps maps={state.maps} />
-    <UploadButton />
-  </section>
-);
+const view: View<State, Actions> = (state, actions) =>
+  state.errorMsg ? (
+    <div>{state.errorMsg}</div>
+  ) : (
+    <section>
+      <Maps maps={state.maps} />
+      <UploadButton />
+    </section>
+  );
 
 const appArgs: [State, Actions, typeof view, HTMLElement | null] = [
   state,
@@ -88,5 +89,3 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 main.getMaps();
-
-window.main = main;

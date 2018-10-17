@@ -458,7 +458,39 @@ function app(state, actions, view, container) {
     return element;
   }
 }
-},{}],"../../node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{}],"../../map-share-common/urls.ts":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+var urls;
+
+if ("development" !== 'production') {
+  urls = {
+    GENERATOR_URL: 'http://localhost:5000/',
+    SERVICE_URL: 'http://localhost:3000/'
+  };
+} else {
+  urls = {
+    GENERATOR_URL: '???',
+    SERVICE_URL: '???'
+  };
+}
+
+exports.GENERATOR_URL = urls.GENERATOR_URL;
+exports.SERVICE_URL = urls.SERVICE_URL;
+},{}],"../../map-share-common/index.ts":[function(require,module,exports) {
+"use strict";
+
+function __export(m) {
+  for (var p in m) {
+    if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+  }
+}
+
+exports.__esModule = true;
+
+__export(require("./urls"));
+},{"./urls":"../../map-share-common/urls.ts"}],"../../node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -1876,9 +1908,9 @@ exports.__esModule = true;
 
 var hyperapp_1 = require("hyperapp");
 
-require("./styles.scss");
+var map_share_common_1 = require("../../map-share-common");
 
-var SERVICE_URL = 'http://localhost:3000/';
+require("./styles.scss");
 
 var Maps = function Maps(_a) {
   var maps = _a.maps;
@@ -1932,7 +1964,7 @@ var actions = {
 
               return [4
               /*yield*/
-              , fetch(SERVICE_URL)];
+              , fetch(map_share_common_1.SERVICE_URL)];
 
             case 1:
               response = _a.sent();
@@ -1984,7 +2016,7 @@ var actions = {
 };
 
 var view = function view(state, actions) {
-  return hyperapp_1.h("section", null, hyperapp_1.h(Maps, {
+  return state.errorMsg ? hyperapp_1.h("div", null, state.errorMsg) : hyperapp_1.h("section", null, hyperapp_1.h(Maps, {
     maps: state.maps
   }), hyperapp_1.h(UploadButton, null));
 };
@@ -2001,8 +2033,7 @@ if ("development" !== 'production') {
 }
 
 main.getMaps();
-window.main = main;
-},{"hyperapp":"../../node_modules/hyperapp/src/index.js","./styles.scss":"styles.scss","hyperapp-redux-devtools":"../../node_modules/hyperapp-redux-devtools/index.js"}],"../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js","../../map-share-common":"../../map-share-common/index.ts","./styles.scss":"styles.scss","hyperapp-redux-devtools":"../../node_modules/hyperapp-redux-devtools/index.js"}],"../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2029,7 +2060,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65238" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52672" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

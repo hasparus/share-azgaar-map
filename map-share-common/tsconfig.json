@@ -4,6 +4,8 @@
     "composite": true,
     "declaration": true,
     "rootDir": ".",
-    "outDir": "build"
-  }
+    "outDir": "."
+  },
+  "include": ["*.ts"],
+  "exclude": ["*.js", "*.d.ts"]
 }
