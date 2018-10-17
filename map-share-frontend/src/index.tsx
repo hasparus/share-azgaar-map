@@ -1,5 +1,5 @@
 import { h, app, Component, View } from 'hyperapp';
-import { Map } from './protocol';
+import { Map } from '../../map-share-common';
 import './styles.scss';
 
 const SERVICE_URL = 'http://localhost:3000/';
@@ -8,7 +8,7 @@ const Maps: Component<{ maps: Map[] }> = ({ maps }) => (
   <section>
     <h1 style={{ marginBottom: 0 }}>Maps</h1>
     <div class="maps-grid">
-      {state.maps.map(map => (
+      {maps.map(map => (
         <MapLink {...map} />
       ))}
     </div>
@@ -31,25 +31,36 @@ const UploadButton: Component = () => (
 );
 
 const state = {
-  maps: [
-    {
-      path: 'example',
-      temporaryLink: 'http://example.com',
-    },
-  ] as Map[],
+  maps: [] as Map[],
+  errorMsg: null as string | null,
 };
 
 type State = typeof state;
 
-async function getMaps() {
-  const response = await fetch(SERVICE_URL);
-  console.log(response);
-}
-
-getMaps();
-
 const actions = {
-  setMaps: maps => () => ({ state: maps }),
+  setState: (diff: Partial<State>) => {
+    console.warn({ diff });
+    return diff;
+  },
+  getMaps: () => async (_: State, actions: Actions) => {
+    try {
+      const response = await fetch(SERVICE_URL);
+      if (response.ok) {
+        const { maps } = await response.json();
+        if (Array.isArray(maps)) {
+          actions.setState({ maps });
+        } else {
+          actions.setState({
+            errorMsg: `Couldn't fetch maps: ${response.status}`,
+          });
+        }
+      }
+    } catch (err) {
+      actions.setState({
+        errorMsg: err.toString(),
+      });
+    }
+  },
 };
 
 type Actions = typeof actions;
@@ -61,4 +72,21 @@ const view: View<State, Actions> = (state, actions) => (
   </section>
 );
 
-app(state, actions, view, document.getElementById('root'));
+const appArgs: [State, Actions, typeof view, HTMLElement | null] = [
+  state,
+  actions,
+  view,
+  document.getElementById('root'),
+];
+
+let main;
+if (process.env.NODE_ENV !== 'production') {
+  const devtools = require('hyperapp-redux-devtools');
+  main = devtools(app)(...appArgs);
+} else {
+  main = app(...appArgs);
+}
+
+main.getMaps();
+
+window.main = main;

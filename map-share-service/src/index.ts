@@ -1,14 +1,14 @@
 import { RequestHandler } from 'micro';
 import { rootHandler } from './routes';
-import makeCorsMiddleware from 'micro-cors';
-
-const corsMiddleware = makeCorsMiddleware();
+import cors from 'micro-cors';
 
 const handler: RequestHandler = async (req, res) => {
-  if (req.url === '/') {
-    return rootHandler(req, res);
+  switch (req.url) {
+    case '/':
+      return rootHandler(req, res);
+    default:
+      return req.url;
   }
-  return req.url;
 };
 
-export default corsMiddleware(handler);
+export default cors()(handler);

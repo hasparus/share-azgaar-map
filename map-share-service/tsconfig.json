@@ -13,13 +13,16 @@
     // "declaration": true,                   /* Generates corresponding '.d.ts' file. */
     // "declarationMap": true,                /* Generates a sourcemap for each corresponding '.d.ts' file. */
     // "sourceMap": true,                     /* Generates corresponding '.map' file. */
-    // "outFile": "./",                       /* Concatenate and emit output to single file. */
-    "outDir": "./build" /* Redirect output structure to the directory. */,
-    "rootDir": "..",
+    "outDir": "./build",
+    "rootDir": "src",
     /* Strict Type-Checking Options */
     "strict": true /* Enable all strict type-checking options. */,
     "noImplicitAny": true,
     "esModuleInterop": true
   },
-  "include": ["./src", "../map-share-frontend/src/protocol.ts"]
+  "references": [
+    {
+      "path": "../map-share-common"
+    }
+  ]
 }

@@ -1,0 +1,9 @@
+{
+  "extends": "../map-share-service/tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "declaration": true,
+    "rootDir": ".",
+    "outDir": "build"
+  }
+}

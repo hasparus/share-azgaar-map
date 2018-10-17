@@ -4,5 +4,10 @@
     "rootDir": "./src",
     "jsx": "react",
     "jsxFactory": "h"
-  }
+  },
+  "references": [
+    {
+      "path": "../map-share-common"
+    }
+  ]
 }

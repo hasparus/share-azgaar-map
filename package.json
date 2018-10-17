@@ -3,10 +3,11 @@
   "private": true,
   "scripts": {
     "updateSubmodules": "git submodule init && git submodule update && git submodule status",
+    "d:common": "yarn tsc --watch --project ./map-share-common",
     "d:frontend": "yarn workspace map-share-frontend dev",
     "d:generator": "yarn workspace azgaars-map-generator start",
     "d:service": "yarn workspace map-share-service dev",
-    "dev": "concurrently -n g,s npm:d:generator npm:d:service"
+    "dev": "node ./scripts/dev.js"
   },
   "workspaces": [
     "map-share-frontend",
