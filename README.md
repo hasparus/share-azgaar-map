@@ -16,8 +16,8 @@ Serves map generator and launches microservice.
 
 - `/azgaars-map-generator` **[submodule]** <- my fork of azgaar's map generator
   - Added map upload from link in query -- `?maplink=<link-to-map>`
-- `/map-share-service` <- uploads maps and generates access links
-  - Needs `DROPBOX_ACCESS_TOKEN` in `process.env`.
+- `/map-share-service` <- uploads maps and generates access links \
+    _Needs `DROPBOX_ACCESS_TOKEN` in `process.env`._
   - [ ] generates permanent short links
 - `/map-share-frontend` <- catalog of maps uploaded with the app
   - [x] gets maps from backend
