@@ -2,6 +2,7 @@
   "name": "development-monorepo",
   "private": true,
   "scripts": {
+    "updateSubmodules": "git submodule init && git submodule update && git submodule status",
     "d:frontend": "yarn workspace map-share-frontend dev",
     "d:generator": "yarn workspace azgaars-map-generator start",
     "d:service": "yarn workspace map-share-service dev",

@@ -1,0 +1,3 @@
+[submodule "azgaars-map-generator"]
+	path = azgaars-map-generator
+	url = git@github.com:hasparus/Fantasy-Map-Generator.git
