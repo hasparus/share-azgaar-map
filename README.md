@@ -15,4 +15,7 @@ Serves map generator and launches microservice.
 - `/map-share-service` <- uploads maps and generates access links
   - Needs `DROPBOX_ACCESS_TOKEN` in `process.env`.
   - TODO:
+    - [ ] Upload maps
     - Generate short links
+- `/map-share-frontend` <- catalog of maps uploaded with the app
+    - [ ] Get maps from backend
