@@ -494,7 +494,320 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 __export(require("./urls"));
-},{"./urls":"../../map-share-common/urls.js"}],"../../node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./urls":"../../map-share-common/urls.js"}],"MapLink.tsx":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var hyperapp_1 = require("hyperapp");
+
+var MapLink = function MapLink(_a) {
+  var path = _a.path,
+      temporaryLink = _a.temporaryLink;
+  return hyperapp_1.h("a", {
+    href: temporaryLink
+  }, path);
+};
+
+exports["default"] = MapLink;
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js"}],"Maps.tsx":[function(require,module,exports) {
+"use strict";
+
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
+exports.__esModule = true;
+
+var hyperapp_1 = require("hyperapp");
+
+var MapLink_1 = __importDefault(require("./MapLink"));
+
+var Maps = function Maps(_a) {
+  var maps = _a.maps;
+  return hyperapp_1.h("section", null, hyperapp_1.h("h1", {
+    style: {
+      marginBottom: 0
+    }
+  }, "Maps"), hyperapp_1.h("div", {
+    "class": "maps-grid"
+  }, maps.map(function (map) {
+    return hyperapp_1.h(MapLink_1["default"], __assign({}, map));
+  })));
+};
+
+exports["default"] = Maps;
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js","./MapLink":"MapLink.tsx"}],"../../map-share-common/urls.ts":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+var urls;
+
+if ("development" !== 'production') {
+  urls = {
+    GENERATOR_URL: 'http://localhost:5000/',
+    SERVICE_URL: 'http://localhost:3000/'
+  };
+} else {
+  urls = {
+    GENERATOR_URL: '???',
+    SERVICE_URL: '???'
+  };
+}
+
+exports.GENERATOR_URL = urls.GENERATOR_URL;
+exports.SERVICE_URL = urls.SERVICE_URL;
+},{}],"../../map-share-common/index.ts":[function(require,module,exports) {
+"use strict";
+
+function __export(m) {
+  for (var p in m) {
+    if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+  }
+}
+
+exports.__esModule = true;
+
+__export(require("./urls"));
+},{"./urls":"../../map-share-common/urls.ts"}],"uploadFiles.ts":[function(require,module,exports) {
+"use strict";
+
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : new P(function (resolve) {
+        resolve(result.value);
+      }).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+exports.__esModule = true;
+
+var map_share_common_1 = require("../../map-share-common");
+
+function uploadFiles(files) {
+  return __awaiter(this, void 0, void 0, function () {
+    var formData, response, json;
+    return __generator(this, function (_a) {
+      switch (_a.label) {
+        case 0:
+          formData = new FormData();
+          Array.prototype.forEach.call(files, function (file) {
+            return formData.append('file', file);
+          });
+          return [4
+          /*yield*/
+          , fetch(map_share_common_1.SERVICE_URL + 'upload', {
+            body: formData,
+            method: 'POST'
+          })];
+
+        case 1:
+          response = _a.sent();
+          return [4
+          /*yield*/
+          , response.text()];
+
+        case 2:
+          json = _a.sent();
+          console.log(json);
+          return [2
+          /*return*/
+          ];
+      }
+    });
+  });
+}
+
+exports.uploadFiles = uploadFiles;
+},{"../../map-share-common":"../../map-share-common/index.ts"}],"UploadButton.tsx":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var hyperapp_1 = require("hyperapp");
+
+var uploadFiles_1 = require("./uploadFiles");
+
+var handleClick = function handleClick() {
+  var input = document.createElement('input');
+  input.type = 'file';
+  input.accept = '.map';
+  input.multiple = true;
+
+  input.onchange = function (event) {
+    var files = event.target.files;
+
+    if (files) {
+      uploadFiles_1.uploadFiles(files);
+    } else {
+      console.error('No files selected!');
+    }
+  };
+
+  input.click();
+};
+
+var UploadButton = function UploadButton() {
+  return hyperapp_1.h("button", {
+    style: {
+      position: 'absolute',
+      bottom: 0
+    },
+    onclick: handleClick
+  }, "Upload map");
+};
+
+exports["default"] = UploadButton;
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js","./uploadFiles":"uploadFiles.ts"}],"../../node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -1751,22 +2064,6 @@ module.exports = function devtools(app) {
 },{"redux":"../../node_modules/redux/es/index.js","redux-devtools-extension":"../../node_modules/redux-devtools-extension/index.js"}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
-var __assign = this && this.__assign || function () {
-  __assign = Object.assign || function (t) {
-    for (var s, i = 1, n = arguments.length; i < n; i++) {
-      s = arguments[i];
-
-      for (var p in s) {
-        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
-      }
-    }
-
-    return t;
-  };
-
-  return __assign.apply(this, arguments);
-};
-
 var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
   return new (P || (P = Promise))(function (resolve, reject) {
     function fulfilled(value) {
@@ -1906,6 +2203,12 @@ var __generator = this && this.__generator || function (thisArg, body) {
   }
 };
 
+var __importDefault = this && this.__importDefault || function (mod) {
+  return mod && mod.__esModule ? mod : {
+    "default": mod
+  };
+};
+
 var _this = this;
 
 exports.__esModule = true;
@@ -1914,37 +2217,11 @@ var hyperapp_1 = require("hyperapp");
 
 var map_share_common_1 = require("../../map-share-common");
 
+var Maps_1 = __importDefault(require("./Maps"));
+
+var UploadButton_1 = __importDefault(require("./UploadButton"));
+
 require("./styles.scss");
-
-var Maps = function Maps(_a) {
-  var maps = _a.maps;
-  return hyperapp_1.h("section", null, hyperapp_1.h("h1", {
-    style: {
-      marginBottom: 0
-    }
-  }, "Maps"), hyperapp_1.h("div", {
-    "class": "maps-grid"
-  }, maps.map(function (map) {
-    return hyperapp_1.h(MapLink, __assign({}, map));
-  })));
-};
-
-var MapLink = function MapLink(_a) {
-  var path = _a.path,
-      temporaryLink = _a.temporaryLink;
-  return hyperapp_1.h("a", {
-    href: temporaryLink
-  }, path);
-};
-
-var UploadButton = function UploadButton() {
-  return hyperapp_1.h("button", {
-    style: {
-      position: 'absolute',
-      bottom: 0
-    }
-  }, "Upload map");
-};
 
 var state = {
   maps: [],
@@ -1952,9 +2229,6 @@ var state = {
 };
 var actions = {
   setState: function setState(diff) {
-    console.warn({
-      diff: diff
-    });
     return diff;
   },
   getMaps: function getMaps() {
@@ -2020,9 +2294,9 @@ var actions = {
 };
 
 var view = function view(state, actions) {
-  return state.errorMsg ? hyperapp_1.h("div", null, state.errorMsg) : hyperapp_1.h("section", null, hyperapp_1.h(Maps, {
+  return state.errorMsg ? hyperapp_1.h("div", null, state.errorMsg) : hyperapp_1.h("section", null, hyperapp_1.h(Maps_1["default"], {
     maps: state.maps
-  }), hyperapp_1.h(UploadButton, null));
+  }), hyperapp_1.h(UploadButton_1["default"], null));
 };
 
 var appArgs = [state, actions, view, document.getElementById('root')];
@@ -2037,7 +2311,7 @@ if ("development" !== 'production') {
 }
 
 main.getMaps();
-},{"hyperapp":"../../node_modules/hyperapp/src/index.js","../../map-share-common":"../../map-share-common/index.js","./styles.scss":"styles.scss","hyperapp-redux-devtools":"../../node_modules/hyperapp-redux-devtools/index.js"}],"../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js","../../map-share-common":"../../map-share-common/index.js","./Maps":"Maps.tsx","./UploadButton":"UploadButton.tsx","./styles.scss":"styles.scss","hyperapp-redux-devtools":"../../node_modules/hyperapp-redux-devtools/index.js"}],"../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2064,7 +2338,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56262" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52085" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);
