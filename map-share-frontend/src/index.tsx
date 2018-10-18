@@ -1,10 +1,11 @@
-import { h, app, View } from 'hyperapp';
+import { h, app, View, Component as HyperComponent } from 'hyperapp';
 
 import { Map, SERVICE_URL } from '../../map-share-common';
 
 import Maps from './Maps';
 import UploadButton from './UploadButton';
 import './styles.scss';
+import { uploadFiles } from './uploadFiles';
 
 const state = {
   maps: [] as Map[],
@@ -36,9 +37,29 @@ const actions = {
       });
     }
   },
+  uploadMaps: () => (_: State, actions: Actions) => {
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = '.map';
+    input.multiple = true;
+    input.onchange = event => {
+      const { files } = event.target as HTMLInputElement;
+      if (files) {
+        uploadFiles(files).then(uploaded => {
+          console.log(uploaded);
+          actions.setState(uploaded);
+        });
+      } else {
+        console.error('No files selected!');
+      }
+    };
+    input.click();
+  },
 };
 
 type Actions = typeof actions;
+
+export type Component<Attrs = {}> = HyperComponent<Attrs, State, Actions>;
 
 const view: View<State, Actions> = (state, actions) =>
   state.errorMsg ? (
@@ -46,7 +67,7 @@ const view: View<State, Actions> = (state, actions) =>
   ) : (
     <section>
       <Maps maps={state.maps} />
-      <UploadButton />
+      <UploadButton onclick={actions.uploadMaps} />
     </section>
   );
 

@@ -1,7 +1,14 @@
-import { RequestHandler, buffer, send } from 'micro';
+import { RequestHandler, send } from 'micro';
 import { upload } from 'micro-upload';
 
+import { dataTransfer } from '../../../map-share-common';
 import dbx from '../peripherals/dropbox';
+import makeDataTransferMaps from '../makeMaps';
+import { ServerResponse } from 'http';
+
+declare module 'micro' {
+  export function send<T>(res: ServerResponse, code: number, data?: T): T;
+}
 
 function asArray<T>(arg: T | T[]): T[] {
   return Array.isArray(arg) ? arg : [arg];
@@ -9,29 +16,25 @@ function asArray<T>(arg: T | T[]): T[] {
 
 const toKilobytes = (bytes: number) => `${Math.round(bytes / 1000)}KB`;
 
-const makeOkMessage = (filesData: { path_lower?: string }[]) => {
-  const filesCount = filesData.length;
-  return (
-    `${filesCount} ${filesCount === 1 ? 'file' : 'files'} uploaded!` +
-    ` Paths: ${filesData.map(f => f.path_lower).join()}`
-  );
-};
+type UploadResult = dataTransfer.Maps | 'No file uploaded.';
 
-export const uploadHandler: RequestHandler = upload(async (req, res) => {
-  if (req.files) {
-    const files = asArray(req.files.file);
-    const uploadedFilesData = await Promise.all(
-      files.map(({ data, name }) => {
-        console.log('Uploading', name, toKilobytes(data.byteLength));
-        return dbx.filesUpload({
-          path: `/${name}`,
-          contents: data,
-          mode: { '.tag': 'overwrite' },
-        });
-      })
-    );
-    return send(res, 200, makeOkMessage(uploadedFilesData));
+export const uploadHandler: RequestHandler = upload(
+  async (req, res): Promise<UploadResult> => {
+    if (req.files) {
+      const files = asArray(req.files.file);
+      const uploadedMapsMetadata = await Promise.all(
+        files.map(({ data, name }) => {
+          console.log('Uploading', name, toKilobytes(data.byteLength));
+          return dbx.filesUpload({
+            path: `/${name}`,
+            contents: data,
+            mode: { '.tag': 'overwrite' },
+          });
+        })
+      );
+      return makeDataTransferMaps(uploadedMapsMetadata);
+    }
+
+    return send(res, 400, 'No file uploaded.');
   }
-
-  return send(res, 400, 'No file uploaded.');
-});
+);

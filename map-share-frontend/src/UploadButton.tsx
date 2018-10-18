@@ -1,29 +1,16 @@
-import { h, Component } from 'hyperapp';
-import { uploadFiles } from './uploadFiles';
+import { h } from 'hyperapp';
+import { Component } from '.';
 
-const handleClick = () => {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = '.map';
-  input.multiple = true;
-  input.onchange = event => {
-    const { files } = event.target as HTMLInputElement;
-    if (files) {
-      uploadFiles(files);
-    } else {
-      console.error('No files selected!');
-    }
-  };
-  input.click();
+type Attrs = {
+  onclick: () => void;
 };
-
-const UploadButton: Component = () => (
+const UploadButton: Component<Attrs> = ({ onclick }) => (
   <button
     style={{
       position: 'absolute',
       bottom: 0,
     }}
-    onclick={handleClick}
+    onclick={onclick}
   >
     Upload map
   </button>

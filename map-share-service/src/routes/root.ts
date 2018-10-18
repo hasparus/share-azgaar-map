@@ -1,33 +1,17 @@
 import { RequestHandler } from 'micro';
 
-import { Map, GENERATOR_URL } from '../../../map-share-common';
+import { dataTransfer } from '../../../map-share-common';
 import dbx from '../peripherals/dropbox';
+import makeDataTransferMaps from '../makeMaps';
 
-async function makeMapUrl(path: string) {
-  const { link } = await dbx.filesGetTemporaryLink({
-    path: path,
+type RootResult = dataTransfer.Maps;
+export const rootHandler: RequestHandler = async (): Promise<RootResult> => {
+  const { entries: files } = await dbx.filesListFolder({
+    path: '',
+    include_deleted: false,
   });
-  return `${GENERATOR_URL}/?maplink=${encodeURIComponent(link)}`;
-}
-
-type RootResult = {
-  maps: Map[];
-};
-export const rootHandler: RequestHandler = async (
-  req,
-  res
-): Promise<RootResult> => {
-  const { entries: files } = await dbx.filesListFolder({ path: '' });
 
   const maps = files.filter(file => file.name.match('.map'));
-  const mapUrls = await Promise.all(
-    maps.map(file => makeMapUrl(file.path_lower!))
-  );
 
-  return {
-    maps: maps.map((file, index) => ({
-      path: file.path_lower || '?',
-      temporaryLink: mapUrls[index],
-    })),
-  };
+  return makeDataTransferMaps(maps);
 };
