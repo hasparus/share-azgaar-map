@@ -1,10 +1,11 @@
 import { h } from 'hyperapp';
-import { Component } from '.';
+
+import { Component } from './Component';
 
 type Attrs = {
-  onclick: () => void;
+  onclick(): void;
 };
-const UploadButton: Component<Attrs> = ({ onclick }) => (
+export const UploadButton: Component<Attrs> = ({ onclick }) => (
   <button
     style={{
       position: 'absolute',
@@ -15,5 +16,3 @@ const UploadButton: Component<Attrs> = ({ onclick }) => (
     Upload map
   </button>
 );
-
-export default UploadButton;

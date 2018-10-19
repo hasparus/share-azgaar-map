@@ -1,10 +1,10 @@
-import { h, Component } from 'hyperapp';
+import { Component, h } from 'hyperapp';
 
 import { Map } from '../../map-share-common';
 
 import MapLink from './MapLink';
 
-const Maps: Component<{
+export const Maps: Component<{
   maps: Map[];
 }> = ({ maps }) => (
   <section>
@@ -16,5 +16,3 @@ const Maps: Component<{
     </div>
   </section>
 );
-
-export default Maps;
