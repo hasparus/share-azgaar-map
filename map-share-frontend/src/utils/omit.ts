@@ -1,4 +1,4 @@
-type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
+export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 
 export function omit<T extends object, K extends keyof T>(
   obj: T,

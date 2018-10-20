@@ -1,10 +1,10 @@
+import { ServerResponse } from 'http';
 import { RequestHandler, send } from 'micro';
 import { upload } from 'micro-upload';
 
 import { dataTransfer } from '../../../map-share-common';
+import { makeDataTransferMaps } from '../makeDataTransferMaps';
 import dbx from '../peripherals/dropbox';
-import makeDataTransferMaps from '../makeMaps';
-import { ServerResponse } from 'http';
 
 declare module 'micro' {
   export function send<T>(res: ServerResponse, code: number, data?: T): T;
@@ -24,7 +24,9 @@ export const uploadHandler: RequestHandler = upload(
       const files = asArray(req.files.file);
       const uploadedMapsMetadata = await Promise.all(
         files.map(({ data, name }) => {
+          // tslint:disable-next-line:no-console
           console.log('Uploading', name, toKilobytes(data.byteLength));
+
           return dbx.filesUpload({
             path: `/${name}`,
             contents: data,
@@ -32,6 +34,7 @@ export const uploadHandler: RequestHandler = upload(
           });
         })
       );
+
       return makeDataTransferMaps(uploadedMapsMetadata);
     }
 

@@ -458,18 +458,16 @@ function app(state, actions, view, container) {
     return element;
   }
 }
-},{}],"../../map-share-common/urls.js":[function(require,module,exports) {
+},{}],"../../map-share-common/urls.ts":[function(require,module,exports) {
 "use strict";
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
+exports.__esModule = true;
 var urls;
 
 if ("development" !== 'production') {
   urls = {
-    GENERATOR_URL: 'http://localhost:5000/',
-    SERVICE_URL: 'http://localhost:3000/'
+    GENERATOR_URL: 'http://localhost:5000',
+    SERVICE_URL: 'http://localhost:3000'
   };
 } else {
   urls = {
@@ -480,7 +478,21 @@ if ("development" !== 'production') {
 
 exports.GENERATOR_URL = urls.GENERATOR_URL;
 exports.SERVICE_URL = urls.SERVICE_URL;
-},{}],"../../map-share-common/index.ts":[function(require,module,exports) {
+},{}],"../../map-share-common/index.js":[function(require,module,exports) {
+"use strict";
+
+function __export(m) {
+  for (var p in m) {
+    if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+  }
+}
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+__export(require("./urls"));
+},{"./urls":"../../map-share-common/urls.ts"}],"../../map-share-common/index.ts":[function(require,module,exports) {
 "use strict";
 
 function __export(m) {
@@ -492,22 +504,113 @@ function __export(m) {
 exports.__esModule = true;
 
 __export(require("./urls"));
-},{"./urls":"../../map-share-common/urls.js"}],"MapLink.tsx":[function(require,module,exports) {
+},{"./urls":"../../map-share-common/urls.ts"}],"api/deleteFiles.ts":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var map_share_common_1 = require("../../../map-share-common");
+
+function deleteFiles(paths) {
+  var body = {
+    paths: paths
+  };
+  return fetch(map_share_common_1.SERVICE_URL + "/delete", {
+    body: JSON.stringify(body),
+    method: 'POST'
+  }).then(function (response) {
+    return response.json();
+  });
+}
+
+exports.deleteFiles = deleteFiles;
+},{"../../../map-share-common":"../../map-share-common/index.ts"}],"api/uploadFiles.ts":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var map_share_common_1 = require("../../../map-share-common");
+
+function uploadFiles(files) {
+  var formData = new FormData();
+  Array.prototype.forEach.call(files, function (file) {
+    return formData.append('file', file);
+  });
+  return fetch(map_share_common_1.SERVICE_URL + "/upload", {
+    body: formData,
+    method: 'POST'
+  }).then(function (response) {
+    return response.json();
+  });
+}
+
+exports.uploadFiles = uploadFiles;
+},{"../../../map-share-common":"../../map-share-common/index.ts"}],"api/index.ts":[function(require,module,exports) {
+"use strict";
+
+function __export(m) {
+  for (var p in m) {
+    if (!exports.hasOwnProperty(p)) exports[p] = m[p];
+  }
+}
+
+exports.__esModule = true;
+
+__export(require("./deleteFiles"));
+
+__export(require("./uploadFiles"));
+},{"./deleteFiles":"api/deleteFiles.ts","./uploadFiles":"api/uploadFiles.ts"}],"ErrorMessage.tsx":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
 
 var hyperapp_1 = require("hyperapp");
 
-var MapLink = function MapLink(_a) {
+exports.ErrorMessage = function (_a) {
+  var msg = _a.msg;
+  return hyperapp_1.h("div", null, msg);
+};
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js"}],"MapLink.tsx":[function(require,module,exports) {
+"use strict";
+
+exports.__esModule = true;
+
+var hyperapp_1 = require("hyperapp");
+
+exports.MapLink = function (_a) {
   var path = _a.path,
       temporaryLink = _a.temporaryLink;
   return hyperapp_1.h("a", {
-    href: temporaryLink
+    href: temporaryLink,
+    key: path
   }, path);
 };
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js"}],"RemoveButton.tsx":[function(require,module,exports) {
+"use strict";
 
-exports["default"] = MapLink;
+var __assign = this && this.__assign || function () {
+  __assign = Object.assign || function (t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+      s = arguments[i];
+
+      for (var p in s) {
+        if (Object.prototype.hasOwnProperty.call(s, p)) t[p] = s[p];
+      }
+    }
+
+    return t;
+  };
+
+  return __assign.apply(this, arguments);
+};
+
+exports.__esModule = true;
+
+var hyperapp_1 = require("hyperapp");
+
+exports.RemoveButton = function (attrs) {
+  return hyperapp_1.h("button", __assign({}, attrs), "x");
+};
 },{"hyperapp":"../../node_modules/hyperapp/src/index.js"}],"Maps.tsx":[function(require,module,exports) {
 "use strict";
 
@@ -527,20 +630,17 @@ var __assign = this && this.__assign || function () {
   return __assign.apply(this, arguments);
 };
 
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
 exports.__esModule = true;
 
 var hyperapp_1 = require("hyperapp");
 
-var MapLink_1 = __importDefault(require("./MapLink"));
+var MapLink_1 = require("./MapLink");
 
-var Maps = function Maps(_a) {
-  var maps = _a.maps;
+var RemoveButton_1 = require("./RemoveButton");
+
+exports.Maps = function (_a) {
+  var maps = _a.maps,
+      deleteMaps = _a.deleteMaps;
   return hyperapp_1.h("section", null, hyperapp_1.h("h1", {
     style: {
       marginBottom: 0
@@ -548,31 +648,329 @@ var Maps = function Maps(_a) {
   }, "Maps"), hyperapp_1.h("div", {
     "class": "maps-grid"
   }, maps.map(function (map) {
-    return hyperapp_1.h(MapLink_1["default"], __assign({}, map));
+    return hyperapp_1.h("article", null, hyperapp_1.h(MapLink_1.MapLink, __assign({}, map)), hyperapp_1.h(RemoveButton_1.RemoveButton, {
+      style: {
+        marginLeft: '15px'
+      },
+      onclick: function onclick() {
+        return deleteMaps([map.path]);
+      }
+    }));
   })));
 };
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js","./MapLink":"MapLink.tsx","./RemoveButton":"RemoveButton.tsx"}],"openFileUploadDialog.ts":[function(require,module,exports) {
+"use strict";
 
-exports["default"] = Maps;
-},{"hyperapp":"../../node_modules/hyperapp/src/index.js","./MapLink":"MapLink.tsx"}],"UploadButton.tsx":[function(require,module,exports) {
+exports.__esModule = true;
+
+function openFileUploadDialog(_a) {
+  var _b = _a.accept,
+      accept = _b === void 0 ? '.map' : _b;
+  return new Promise(function (resolve) {
+    var input = document.createElement('input');
+    input.type = 'file';
+    input.multiple = true;
+    input.accept = accept;
+
+    input.onchange = function (event) {
+      return resolve(event);
+    };
+
+    input.click();
+  });
+}
+
+exports.openFileUploadDialog = openFileUploadDialog;
+},{}],"UploadButton.tsx":[function(require,module,exports) {
 "use strict";
 
 exports.__esModule = true;
 
 var hyperapp_1 = require("hyperapp");
 
-var UploadButton = function UploadButton(_a) {
+exports.UploadButton = function (_a) {
   var onclick = _a.onclick;
   return hyperapp_1.h("button", {
     style: {
       position: 'absolute',
       bottom: 0
     },
+    className: "button--big",
     onclick: onclick
   }, "Upload map");
 };
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js"}],"core.tsx":[function(require,module,exports) {
+"use strict";
 
-exports["default"] = UploadButton;
-},{"hyperapp":"../../node_modules/hyperapp/src/index.js"}],"../../node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
+var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : new P(function (resolve) {
+        resolve(result.value);
+      }).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = this && this.__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var _this = this;
+
+exports.__esModule = true;
+
+var hyperapp_1 = require("hyperapp");
+
+var map_share_common_1 = require("../../map-share-common");
+
+var api_1 = require("./api");
+
+var ErrorMessage_1 = require("./ErrorMessage");
+
+var Maps_1 = require("./Maps");
+
+var openFileUploadDialog_1 = require("./openFileUploadDialog");
+
+var UploadButton_1 = require("./UploadButton");
+
+exports.state = {
+  maps: [],
+  errorMsg: null
+};
+exports.actions = {
+  setState: function setState(diff) {
+    return diff;
+  },
+  getMaps: function getMaps() {
+    return function (_, acts) {
+      return __awaiter(_this, void 0, void 0, function () {
+        var response, maps, err_1;
+        return __generator(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              _a.trys.push([0, 4,, 5]);
+
+              return [4
+              /*yield*/
+              , fetch(map_share_common_1.SERVICE_URL)];
+
+            case 1:
+              response = _a.sent();
+              if (!response.ok) return [3
+              /*break*/
+              , 3];
+              return [4
+              /*yield*/
+              , response.json()];
+
+            case 2:
+              maps = _a.sent().maps;
+
+              if (Array.isArray(maps)) {
+                acts.setState({
+                  maps: maps
+                });
+              } else {
+                acts.setState({
+                  errorMsg: "Couldn't fetch maps: " + response.status
+                });
+              }
+
+              _a.label = 3;
+
+            case 3:
+              return [3
+              /*break*/
+              , 5];
+
+            case 4:
+              err_1 = _a.sent();
+              acts.setState({
+                errorMsg: err_1.toString()
+              });
+              return [3
+              /*break*/
+              , 5];
+
+            case 5:
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+  },
+  uploadMaps: function uploadMaps() {
+    return function (st, acts) {
+      openFileUploadDialog_1.openFileUploadDialog({
+        accept: '.map'
+      }).then(function (event) {
+        var files = event.target.files;
+
+        if (files) {
+          api_1.uploadFiles(files).then(function (uploaded) {
+            acts.setState({
+              maps: st.maps.concat(uploaded.maps)
+            });
+          });
+        } else {
+          console.error('No files selected!');
+        }
+      });
+    };
+  },
+  deleteMaps: function deleteMaps(paths) {
+    return function (st, acts) {
+      api_1.deleteFiles(paths).then(function () {
+        var pathsSet = new Set(paths);
+        acts.setState({
+          maps: st.maps.filter(function (m) {
+            return !pathsSet.has(m.path);
+          })
+        });
+      });
+    };
+  }
+};
+
+exports.view = function (st, acts) {
+  return hyperapp_1.h("section", null, hyperapp_1.h(Maps_1.Maps, {
+    maps: st.maps,
+    deleteMaps: acts.deleteMaps
+  }), hyperapp_1.h(UploadButton_1.UploadButton, {
+    onclick: acts.uploadMaps
+  }), hyperapp_1.h(ErrorMessage_1.ErrorMessage, {
+    msg: st.errorMsg
+  }));
+};
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js","../../map-share-common":"../../map-share-common/index.js","./api":"api/index.ts","./ErrorMessage":"ErrorMessage.tsx","./Maps":"Maps.tsx","./openFileUploadDialog":"openFileUploadDialog.ts","./UploadButton":"UploadButton.tsx"}],"../../node_modules/parcel/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -644,28 +1042,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../../node_modules/parcel/src/builtins/css-loader.js"}],"uploadFiles.ts":[function(require,module,exports) {
-"use strict";
-
-exports.__esModule = true;
-
-var map_share_common_1 = require("../../map-share-common");
-
-function uploadFiles(files) {
-  var formData = new FormData();
-  Array.prototype.forEach.call(files, function (file) {
-    return formData.append('file', file);
-  });
-  return fetch(map_share_common_1.SERVICE_URL + 'upload', {
-    body: formData,
-    method: 'POST'
-  }).then(function (response) {
-    return response.json();
-  });
-}
-
-exports.uploadFiles = uploadFiles;
-},{"../../map-share-common":"../../map-share-common/index.ts"}],"../../node_modules/lodash-es/_freeGlobal.js":[function(require,module,exports) {
+},{"_css_loader":"../../node_modules/parcel/src/builtins/css-loader.js"}],"../../node_modules/lodash-es/_freeGlobal.js":[function(require,module,exports) {
 var global = arguments[3];
 "use strict";
 
@@ -1850,272 +2227,20 @@ module.exports = function devtools(app) {
 },{"redux":"../../node_modules/redux/es/index.js","redux-devtools-extension":"../../node_modules/redux-devtools-extension/index.js"}],"index.tsx":[function(require,module,exports) {
 "use strict";
 
-var __awaiter = this && this.__awaiter || function (thisArg, _arguments, P, generator) {
-  return new (P || (P = Promise))(function (resolve, reject) {
-    function fulfilled(value) {
-      try {
-        step(generator.next(value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function rejected(value) {
-      try {
-        step(generator["throw"](value));
-      } catch (e) {
-        reject(e);
-      }
-    }
-
-    function step(result) {
-      result.done ? resolve(result.value) : new P(function (resolve) {
-        resolve(result.value);
-      }).then(fulfilled, rejected);
-    }
-
-    step((generator = generator.apply(thisArg, _arguments || [])).next());
-  });
-};
-
-var __generator = this && this.__generator || function (thisArg, body) {
-  var _ = {
-    label: 0,
-    sent: function sent() {
-      if (t[0] & 1) throw t[1];
-      return t[1];
-    },
-    trys: [],
-    ops: []
-  },
-      f,
-      y,
-      t,
-      g;
-  return g = {
-    next: verb(0),
-    "throw": verb(1),
-    "return": verb(2)
-  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
-    return this;
-  }), g;
-
-  function verb(n) {
-    return function (v) {
-      return step([n, v]);
-    };
-  }
-
-  function step(op) {
-    if (f) throw new TypeError("Generator is already executing.");
-
-    while (_) {
-      try {
-        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
-        if (y = 0, t) op = [op[0] & 2, t.value];
-
-        switch (op[0]) {
-          case 0:
-          case 1:
-            t = op;
-            break;
-
-          case 4:
-            _.label++;
-            return {
-              value: op[1],
-              done: false
-            };
-
-          case 5:
-            _.label++;
-            y = op[1];
-            op = [0];
-            continue;
-
-          case 7:
-            op = _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-
-          default:
-            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
-              _ = 0;
-              continue;
-            }
-
-            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
-              _.label = op[1];
-              break;
-            }
-
-            if (op[0] === 6 && _.label < t[1]) {
-              _.label = t[1];
-              t = op;
-              break;
-            }
-
-            if (t && _.label < t[2]) {
-              _.label = t[2];
-
-              _.ops.push(op);
-
-              break;
-            }
-
-            if (t[2]) _.ops.pop();
-
-            _.trys.pop();
-
-            continue;
-        }
-
-        op = body.call(thisArg, _);
-      } catch (e) {
-        op = [6, e];
-        y = 0;
-      } finally {
-        f = t = 0;
-      }
-    }
-
-    if (op[0] & 5) throw op[1];
-    return {
-      value: op[0] ? op[1] : void 0,
-      done: true
-    };
-  }
-};
-
-var __importDefault = this && this.__importDefault || function (mod) {
-  return mod && mod.__esModule ? mod : {
-    "default": mod
-  };
-};
-
-var _this = this;
-
 exports.__esModule = true;
 
 var hyperapp_1 = require("hyperapp");
 
-var map_share_common_1 = require("../../map-share-common");
+var core_1 = require("./core"); // tslint:disable-next-line:no-import-side-effect
 
-var Maps_1 = __importDefault(require("./Maps"));
-
-var UploadButton_1 = __importDefault(require("./UploadButton"));
 
 require("./styles.scss");
 
-var uploadFiles_1 = require("./uploadFiles");
-
-var state = {
-  maps: [],
-  errorMsg: null
-};
-var actions = {
-  setState: function setState(diff) {
-    return diff;
-  },
-  getMaps: function getMaps() {
-    return function (_, actions) {
-      return __awaiter(_this, void 0, void 0, function () {
-        var response, maps, err_1;
-        return __generator(this, function (_a) {
-          switch (_a.label) {
-            case 0:
-              _a.trys.push([0, 4,, 5]);
-
-              return [4
-              /*yield*/
-              , fetch(map_share_common_1.SERVICE_URL)];
-
-            case 1:
-              response = _a.sent();
-              if (!response.ok) return [3
-              /*break*/
-              , 3];
-              return [4
-              /*yield*/
-              , response.json()];
-
-            case 2:
-              maps = _a.sent().maps;
-
-              if (Array.isArray(maps)) {
-                actions.setState({
-                  maps: maps
-                });
-              } else {
-                actions.setState({
-                  errorMsg: "Couldn't fetch maps: " + response.status
-                });
-              }
-
-              _a.label = 3;
-
-            case 3:
-              return [3
-              /*break*/
-              , 5];
-
-            case 4:
-              err_1 = _a.sent();
-              actions.setState({
-                errorMsg: err_1.toString()
-              });
-              return [3
-              /*break*/
-              , 5];
-
-            case 5:
-              return [2
-              /*return*/
-              ];
-          }
-        });
-      });
-    };
-  },
-  uploadMaps: function uploadMaps() {
-    return function (_, actions) {
-      var input = document.createElement('input');
-      input.type = 'file';
-      input.accept = '.map';
-      input.multiple = true;
-
-      input.onchange = function (event) {
-        var files = event.target.files;
-
-        if (files) {
-          uploadFiles_1.uploadFiles(files).then(function (uploaded) {
-            console.log(uploaded);
-            actions.setState(uploaded);
-          });
-        } else {
-          console.error('No files selected!');
-        }
-      };
-
-      input.click();
-    };
-  }
-};
-
-var view = function view(state, actions) {
-  return state.errorMsg ? hyperapp_1.h("div", null, state.errorMsg) : hyperapp_1.h("section", null, hyperapp_1.h(Maps_1["default"], {
-    maps: state.maps
-  }), hyperapp_1.h(UploadButton_1["default"], {
-    onclick: actions.uploadMaps
-  }));
-};
-
-var appArgs = [state, actions, view, document.getElementById('root')];
+var appArgs = [core_1.state, core_1.actions, core_1.view, document.getElementById('root')];
 var main;
 
 if ("development" !== 'production') {
+  // tslint:disable-next-line:no-var-requires
   var devtools = require('hyperapp-redux-devtools');
 
   main = devtools(hyperapp_1.app).apply(void 0, appArgs);
@@ -2124,7 +2249,7 @@ if ("development" !== 'production') {
 }
 
 main.getMaps();
-},{"hyperapp":"../../node_modules/hyperapp/src/index.js","../../map-share-common":"../../map-share-common/index.ts","./Maps":"Maps.tsx","./UploadButton":"UploadButton.tsx","./styles.scss":"styles.scss","./uploadFiles":"uploadFiles.ts","hyperapp-redux-devtools":"../../node_modules/hyperapp-redux-devtools/index.js"}],"../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"hyperapp":"../../node_modules/hyperapp/src/index.js","./core":"core.tsx","./styles.scss":"styles.scss","hyperapp-redux-devtools":"../../node_modules/hyperapp-redux-devtools/index.js"}],"../../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2151,7 +2276,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52975" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61047" + '/');
 
   ws.onmessage = function (event) {
     var data = JSON.parse(event.data);

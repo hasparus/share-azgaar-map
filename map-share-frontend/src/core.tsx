@@ -1,13 +1,12 @@
 import { h, View } from 'hyperapp';
-import fromPairs from 'ramda.frompairs';
 
 import { Map, SERVICE_URL } from '../../map-share-common';
 
 import { deleteFiles, uploadFiles } from './api';
+import { ErrorMessage } from './ErrorMessage';
 import { Maps } from './Maps';
 import { openFileUploadDialog } from './openFileUploadDialog';
 import { UploadButton } from './UploadButton';
-import { omit } from './utils/omit';
 
 export const state = {
   maps: [] as Map[],
@@ -53,8 +52,9 @@ export const actions = {
   },
   deleteMaps: (paths: string[]) => (st: State, acts: Actions) => {
     deleteFiles(paths).then(() => {
+      const pathsSet = new Set(paths);
       acts.setState({
-        maps: Object.values(omit(fromPairs(st.maps.map(m => [m.path, m] as [string, Map])), paths)).
+        maps: st.maps.filter(m => !pathsSet.has(m.path)),
       });
     });
   },
@@ -62,12 +62,10 @@ export const actions = {
 
 export type Actions = typeof actions;
 
-export const view: View<State, Actions> = (st, acts) =>
-  st.errorMsg ? (
-    <div>{st.errorMsg}</div>
-  ) : (
-    <section>
-      <Maps maps={st.maps} />
-      <UploadButton onclick={acts.uploadMaps} />
-    </section>
-  );
+export const view: View<State, Actions> = (st, acts) => (
+  <section>
+    <Maps maps={st.maps} deleteMaps={acts.deleteMaps} />
+    <UploadButton onclick={acts.uploadMaps} />
+    <ErrorMessage msg={st.errorMsg} />
+  </section>
+);

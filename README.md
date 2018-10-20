@@ -23,4 +23,6 @@ Serves map generator and launches microservice.
   - [ ] generates permanent short links
 - `/map-share-frontend` <- catalog of maps uploaded with the app
   - [x] gets maps from backend
-  - [ ] uploads maps
+  - [x] uploads maps
+  - [x] deletes maps
+    - [ ] asks for confirmation

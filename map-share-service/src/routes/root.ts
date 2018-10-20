@@ -1,8 +1,8 @@
 import { RequestHandler } from 'micro';
 
 import { dataTransfer } from '../../../map-share-common';
+import { makeDataTransferMaps } from '../makeDataTransferMaps';
 import dbx from '../peripherals/dropbox';
-import makeDataTransferMaps from '../makeMaps';
 
 type RootResult = dataTransfer.Maps;
 export const rootHandler: RequestHandler = async (): Promise<RootResult> => {

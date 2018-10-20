@@ -2,8 +2,8 @@ let urls;
 
 if (process.env.NODE_ENV !== 'production') {
   urls = {
-    GENERATOR_URL: 'http://localhost:5000/',
-    SERVICE_URL: 'http://localhost:3000/',
+    GENERATOR_URL: 'http://localhost:5000',
+    SERVICE_URL: 'http://localhost:3000',
   };
 } else {
   urls = {

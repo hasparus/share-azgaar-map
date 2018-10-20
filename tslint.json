@@ -14,6 +14,8 @@
     "typedef": false,
     "prefer-type-cast": false,
     "no-angle-bracket-type-assertion": true,
-    "import-name": false
+    "import-name": false,
+    "react-this-binding-issue": false,
+    "export-name": false
   }
 }

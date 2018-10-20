@@ -11,6 +11,7 @@ export const UploadButton: Component<Attrs> = ({ onclick }) => (
       position: 'absolute',
       bottom: 0,
     }}
+    className="button--big"
     onclick={onclick}
   >
     Upload map
