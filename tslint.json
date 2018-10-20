@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "tslint:latest",
+    "tslint-sonarts",
+    "tslint-microsoft-contrib",
+    "tslint-config-prettier"
+  ],
+  "rules": {
+    "ordered-imports": [true, { "grouped-imports": true }],
+    "missing-jsdoc": false,
+    "no-relative-imports": false,
+    "no-require-imports": false, // no-var-requires enabled
+    "variable-name": [true, "allow-pascal-case", "allow-leading-underscore"],
+    "typedef": false,
+    "prefer-type-cast": false,
+    "no-angle-bracket-type-assertion": true,
+    "import-name": false,
+    "react-this-binding-issue": false,
+    "export-name": false
+  }
+}

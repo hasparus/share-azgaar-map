@@ -1,1 +1,3 @@
-export { default as rootHandler } from './root';
+export * from './root';
+export * from './upload';
+export * from './delete';
