@@ -30,7 +30,8 @@ export const uploadHandler: RequestHandler = upload(
           return dbx.filesUpload({
             path: `/${name}`,
             contents: data,
-            mode: { '.tag': 'overwrite' },
+            autorename: true,
+            mode: { '.tag': 'add' },
           });
         })
       );
