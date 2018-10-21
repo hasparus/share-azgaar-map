@@ -5,8 +5,8 @@ import { Map, SERVICE_URL } from '../../map-share-common';
 import { deleteFiles, uploadFiles } from './api';
 import { ErrorMessage } from './ErrorMessage';
 import { Maps } from './Maps';
-import { openFileUploadDialog } from './openFileUploadDialog';
 import { UploadButton } from './UploadButton';
+import { openFileUploadDialog } from './utils/openFileUploadDialog';
 
 export const state = {
   maps: [] as Map[],
