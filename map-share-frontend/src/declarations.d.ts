@@ -1,3 +1,5 @@
-declare module 'ramda.frompairs' {
-  export { fromPairs as default } from 'ramda';
+declare namespace DropboxTypes {
+  interface DropboxOptions {
+    fetch: any;
+  }
 }

@@ -12,9 +12,9 @@ Pulls map generator.
 
 ### `yarn dev`
 
-Serves map generator and launches microservice.
+Serves map generator and launches service and frontend dev servers.
 
-## 🔍 About
+## 🔍 About and todo lists
 
 - `/azgaars-map-generator` **[submodule]** <- my fork of azgaar's map generator
   - Added map upload from link in query -- `?maplink=<link-to-map>`
@@ -24,5 +24,5 @@ Serves map generator and launches microservice.
 - `/map-share-frontend` <- catalog of maps uploaded with the app
   - [x] gets maps from backend
   - [x] uploads maps
-  - [x] deletes maps
-    - [ ] asks for confirmation
+  - [ ] admin logs in with his dropbox account
+    - [ ] deletes maps

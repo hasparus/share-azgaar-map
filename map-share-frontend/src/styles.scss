@@ -1,23 +1,30 @@
-$blue: #29339b;
-$yellow: #fefe3b;
+:root {
+  --blue: #29339b;
+  --yellow: #fefe3b;
+}
+
+html,
+body {
+  height: 100%;
+}
 
 html {
   background: #eeeeee;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  color: black;
+  font-family: 'PT Mono', monospace;
+  font-size: 20px;
 }
 
 body {
-  background: $yellow;
-  color: black;
+  margin: 0;
+}
+
+main {
+  background: var(--yellow);
   padding: 1em;
   width: 80vw;
   min-height: 300px;
 
-  font-family: 'PT Mono', monospace;
-  font-size: 20px;
   position: relative;
 }
 
@@ -30,16 +37,17 @@ a {
   font-family: inherit;
 
   &:hover {
-    color: $blue;
+    color: var(--blue);
   }
 }
 
+.button,
 button {
   border: 1px black solid;
   font-family: inherit;
   font-size: inherit;
   margin: 1em 0;
-  background: $yellow;
+  background: var(--yellow);
   color: black;
 
   cursor: pointer;
@@ -74,4 +82,20 @@ button {
       border-right-width: 0px;
     }
   }
+}
+
+.footer {
+  position: absolute;
+  left: 0;
+  bottom: 1em;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

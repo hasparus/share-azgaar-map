@@ -16,6 +16,8 @@
     "no-angle-bracket-type-assertion": true,
     "import-name": false,
     "react-this-binding-issue": false,
-    "export-name": false
+    "export-name": false,
+    "no-namespace": [true, "allow-declarations"],
+    "interface-name": [true, "never-prefix"]
   }
 }

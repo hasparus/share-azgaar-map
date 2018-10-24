@@ -1,14 +1,17 @@
-import { h, View } from 'hyperapp';
+import { h, View, VNode } from 'hyperapp';
 
 import { Map, SERVICE_URL } from '../../map-share-common';
 
 import { deleteFiles, uploadFiles } from './api';
+import * as dropboxAuth from './dropbox/auth';
+import { FEATURE_LOGIN } from './env';
 import { ErrorMessage } from './ErrorMessage';
 import { Maps } from './Maps';
 import { UploadButton } from './UploadButton';
 import { openFileUploadDialog } from './utils/openFileUploadDialog';
 
 export const state = {
+  ...dropboxAuth.state,
   maps: [] as Map[],
   errorMsg: null as string | null,
 };
@@ -16,6 +19,7 @@ export const state = {
 export type State = typeof state;
 
 export const actions = {
+  ...dropboxAuth.actions,
   setState: (diff: Partial<State>) => {
     return diff;
   },
@@ -63,9 +67,25 @@ export const actions = {
 export type Actions = typeof actions;
 
 export const view: View<State, Actions> = (st, acts) => (
-  <section>
-    <Maps maps={st.maps} deleteMaps={acts.deleteMaps} />
-    <UploadButton onclick={acts.uploadMaps} />
-    <ErrorMessage msg={st.errorMsg} />
-  </section>
+  <article>
+    <main>
+      <Maps maps={st.maps} deleteMaps={acts.deleteMaps} />
+      <ErrorMessage msg={st.errorMsg} />
+      <section
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          columnGap: '1em',
+        }}
+      >
+        <UploadButton onclick={acts.uploadMaps} />
+        {FEATURE_LOGIN && <dropboxAuth.LoginButton />}
+      </section>
+    </main>
+    <footer className="footer">
+      <dropboxAuth.AdminLoginLink />
+    </footer>
+  </article>
 );

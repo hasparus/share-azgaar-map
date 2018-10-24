@@ -1,6 +1,7 @@
 import { app } from 'hyperapp';
 
 import { Actions, actions, State, state, view } from './core';
+import { handleDropboxAuthQueryString } from './dropbox/auth';
 
 // tslint:disable-next-line:no-import-side-effect
 import './styles.scss';
@@ -24,3 +25,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 main.getMaps();
+handleDropboxAuthQueryString(main);
