@@ -1,6 +1,5 @@
 import camelCase from 'camelcase';
 import { Component, h } from 'hyperapp';
-import { fromPairs, toPairs } from 'ramda';
 
 import { dbx } from './dbx';
 // tslint:disable-next-line:no-import-side-effect
@@ -42,19 +41,6 @@ function parseQueryString(query: string) {
   });
 
   return ret;
-}
-
-interface Object {
-  entries<X extends string, Y>(o: { [key in X]: Y }): [X, Y][];
-}
-
-function mapKeys<K1 extends string, K2 extends string, V>(
-  obj: Record<K1, V>,
-  f: ((_: K1) => K2)
-): Record<K2, V> {
-  return fromPairs(
-    Object.entries(obj).map(([k, v]) => [f(k), v] as [K2, V])
-  ) as Record<K2, V>;
 }
 
 export const state = {
