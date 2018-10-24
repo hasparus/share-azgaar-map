@@ -1,7 +1,7 @@
 import { json, RequestHandler } from 'micro';
 
 import { dataTransfer } from '../../../map-share-common';
-import dbx from '../peripherals/dropbox';
+import { dbx } from '../peripherals/dropbox';
 
 type DeletedMapPaths = {
   paths: string[];

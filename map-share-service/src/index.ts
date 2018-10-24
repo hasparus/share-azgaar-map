@@ -1,7 +1,7 @@
 import { RequestHandler } from 'micro';
 import cors from 'micro-cors';
 
-import { rootHandler, uploadHandler, deleteHandler } from './routes';
+import { deleteHandler, rootHandler, uploadHandler } from './routes';
 
 const handler: RequestHandler = async (req, res) => {
   switch (req.url) {
@@ -16,4 +16,5 @@ const handler: RequestHandler = async (req, res) => {
   }
 };
 
+// tslint:disable-next-line:no-default-export
 export default cors()(handler);
