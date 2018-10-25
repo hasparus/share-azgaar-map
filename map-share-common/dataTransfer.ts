@@ -6,3 +6,8 @@ export type Maps = {
 export type MapPaths = {
   paths: string[];
 };
+export type AccountId = string;
+
+export type DeleteRequestBody = MapPaths & {
+  accountId: AccountId;
+};

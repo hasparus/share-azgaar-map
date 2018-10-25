@@ -1,9 +1,9 @@
-import { SERVICE_URL } from '../../../map-share-common';
+import { dataTransfer, ServiceRoutes } from '../../../map-share-common';
 
-export function deleteFiles(paths: string[]) {
-  const body = { paths };
+export function deleteFiles(paths: string[], accountId: string) {
+  const body: dataTransfer.DeleteRequestBody = { paths, accountId };
 
-  return fetch(`${SERVICE_URL}/delete`, {
+  return fetch(ServiceRoutes.Delete, {
     body: JSON.stringify(body),
     method: 'POST',
   }).then(response => response.json());

@@ -1,4 +1,4 @@
-import { SERVICE_URL } from '../../../map-share-common';
+import { ServiceRoutes } from '../../../map-share-common';
 
 export function uploadFiles(files: FileList) {
   const formData = new FormData();
@@ -6,7 +6,7 @@ export function uploadFiles(files: FileList) {
     formData.append('file', file)
   );
 
-  return fetch(`${SERVICE_URL}/upload`, {
+  return fetch(ServiceRoutes.Upload, {
     body: formData,
     method: 'POST',
   }).then(response => response.json());

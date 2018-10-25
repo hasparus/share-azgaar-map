@@ -11,8 +11,6 @@ export const rootHandler: RequestHandler = async (): Promise<RootResult> => {
     include_deleted: false,
   });
 
-  console.log('clientid', await dbx.usersGetCurrentAccount(undefined));
-
   const maps = files.filter(file => file.name.match('.map'));
 
   return makeDataTransferMaps(maps);

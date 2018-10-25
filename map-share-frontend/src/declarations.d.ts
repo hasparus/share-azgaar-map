@@ -1,6 +1,6 @@
 declare namespace DropboxTypes {
   interface DropboxOptions {
-    fetch: any;
+    fetch: typeof window.fetch;
   }
 }
 

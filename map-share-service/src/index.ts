@@ -3,12 +3,12 @@ import cors from 'micro-cors';
 
 import { ServiceRoutes } from '../../map-share-common';
 
-import { deleteHandler, rootHandler, uploadHandler } from './routes';
-
-const handlers = {
-  [ServiceRoutes.Root]: rootHandler,
-  [ServiceRoutes.Upload]: uploadHandler,
-};
+import {
+  authorizeHandler,
+  deleteHandler,
+  rootHandler,
+  uploadHandler,
+} from './routes';
 
 const handler: RequestHandler = async (req, res) => {
   switch (req.url) {
@@ -21,7 +21,7 @@ const handler: RequestHandler = async (req, res) => {
     case ServiceRoutes.Authorize:
       return authorizeHandler(req, res);
     default:
-      return req.url;
+      return { url: req.url };
   }
 };
 

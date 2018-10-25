@@ -1,5 +1,7 @@
 import { Dropbox } from 'dropbox';
-import { Component, h } from 'hyperapp';
+import { Component, h, VNode } from 'hyperapp';
+
+import { authorize } from '../api';
 
 // tslint:disable-next-line:no-import-side-effect
 import './styles.scss';
@@ -47,34 +49,32 @@ function parseQueryString(query: string) {
 
 export const state = {
   auth: {
-    data: null,
+    data: undefined,
+    isAdmin: undefined as boolean | undefined,
   },
 };
 
-export type State = typeof state;
+type State = typeof state;
+type AuthState = State['auth'];
 
 export const actions = {
   auth: {
-    authorizeWithDropbox: () => {
+    setState: (diff: Partial<AuthState>) => diff,
+    authorizeWithDropbox: () => async (_: AuthState, acts: AuthActions) => {
       const parsed = parseQueryString(location.hash) as Record<
         'access_token' | 'account_id' | 'uid' | 'token_type',
         string
       >;
 
-      const data = {
-        accessToken: parsed.access_token,
-        accountId: parsed.account_id,
-        uid: parsed.uid,
-      };
-      history.replaceState(null, '', '/');
+      history.replaceState(undefined, '', '/');
 
-      return { data };
+      const isAdmin = await authorize(parsed.account_id);
+      acts.setState(isAdmin);
     },
   },
 };
 
-export type Actions = typeof actions;
-
+type AuthActions = typeof actions['auth'];
 export type LoginButtonAttrs = {};
 export const LoginButton: Component<LoginButtonAttrs> = () => (
   <a className="anchor-button button button--big" href={AUTHENTICATION_URL}>
@@ -83,13 +83,46 @@ export const LoginButton: Component<LoginButtonAttrs> = () => (
 );
 
 export type AdminLoginLinkAttrs = {};
-export const AdminLoginLink: Component<AdminLoginLinkAttrs> = () => (
-  <a className="admin-login-link" href={AUTHENTICATION_URL}>
-    admin
-  </a>
-);
 
-export function handleAuthQueryString(main: Actions) {
+declare namespace hyperapp {
+  export interface View<State, Actions> {
+    // tslint:disable-next-line:callable-types
+    (state: State, actions: Actions): VNode<object> | null;
+  }
+}
+
+// tslint:disable-next-line:no-any
+const HYPERAPP_NULL = null as any;
+
+export const AdminLoginLink: Component<
+  AdminLoginLinkAttrs,
+  State
+> = () => st => {
+  switch (st.auth.isAdmin) {
+    case undefined:
+      return (
+        <a className="admin-login-link" href={AUTHENTICATION_URL}>
+          admin
+        </a>
+      );
+    case false:
+      return HYPERAPP_NULL;
+    case true:
+      return (
+        <span
+          style={{
+            fontSize: '0.6em',
+          }}
+        >
+          logged in
+        </span>
+      );
+    default:
+      throw Error('invalid state');
+  }
+};
+
+export function handleAuthQueryString(main: typeof actions) {
   if (location.pathname === '/auth') {
     main.auth.authorizeWithDropbox();
   }
