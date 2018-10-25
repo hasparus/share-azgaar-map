@@ -1,10 +1,5 @@
-export declare type Map = {
-    path: string;
-    temporaryLink: string;
-};
-export declare namespace dataTransfer {
-    type Maps = {
-        maps: Map[];
-    };
-}
 export * from './urls';
+export * from './serviceRoutes';
+export * from './coreTypes';
+import * as dataTransfer from './dataTransfer';
+export { dataTransfer };

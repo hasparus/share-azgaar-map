@@ -3,7 +3,7 @@ import { h, View, VNode } from 'hyperapp';
 import { Map, SERVICE_URL } from '../../map-share-common';
 
 import { deleteFiles, uploadFiles } from './api';
-import * as dropboxAuth from './dropbox/auth';
+import * as auth from './auth';
 import { FEATURE_LOGIN } from './env';
 import { ErrorMessage } from './ErrorMessage';
 import { Maps } from './Maps';
@@ -11,7 +11,7 @@ import { UploadButton } from './UploadButton';
 import { openFileUploadDialog } from './utils/openFileUploadDialog';
 
 export const state = {
-  ...dropboxAuth.state,
+  ...auth.state,
   maps: [] as Map[],
   errorMsg: null as string | null,
 };
@@ -19,7 +19,7 @@ export const state = {
 export type State = typeof state;
 
 export const actions = {
-  ...dropboxAuth.actions,
+  ...auth.actions,
   setState: (diff: Partial<State>) => {
     return diff;
   },
@@ -81,11 +81,11 @@ export const view: View<State, Actions> = (st, acts) => (
         }}
       >
         <UploadButton onclick={acts.uploadMaps} />
-        {FEATURE_LOGIN && <dropboxAuth.LoginButton />}
+        {FEATURE_LOGIN && <auth.LoginButton />}
       </section>
     </main>
     <footer className="footer">
-      <dropboxAuth.AdminLoginLink />
+      <auth.AdminLoginLink />
     </footer>
   </article>
 );

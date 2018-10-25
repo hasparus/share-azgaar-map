@@ -1,5 +1,5 @@
 Arguments: 
-  D:\universal-tools\Node\node.exe D:\universal-tools\Yarn\lib\cli.js add @types/ramda.frompairs
+  D:\universal-tools\Node\node.exe D:\universal-tools\Yarn\bin\yarn.js add dropbox @types/dropbox
 
 PATH: 
   C:\Python27\;C:\Python27\Scripts;C:\Python37\Scripts\;C:\Python37\;C:\Program Files\Docker\Docker\Resources\bin;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;D:\universal-tools\Git\cmd;D:\universal-tools\Git\mingw64\bin;D:\universal-tools\Git\usr\bin;D:\universal-tools\Node\;D:\universal-tools\Yarn\bin\;D:\universal-tools\CMake\bin;D:\universal-tools\LLVM\bin;C:\ProgramData\chocolatey\bin;;C:\Program Files (x86)\gnupg\bin;D:\universal-tools\Elm\0.19\bin;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;D:\universal-tools\Microsoft VS Code\bin;C:\Users\hasparus\AppData\Local\hyper\app-2.0.0\resources\bin;C:\Users\hasparus\AppData\Roaming\npm;C:\Users\hasparus\AppData\Local\Yarn\bin;
@@ -14,8 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: getaddrinfo ENOTFOUND registry.yarnpkg.com registry.yarnpkg.com:443
-      at GetAddrInfoReqWrap.onlookup [as oncomplete] (dns.js:57:26)
+  Error: https://registry.yarnpkg.com/@types%2fdropbox: Not found
+      at Request.params.callback [as _callback] (D:\universal-tools\Yarn\lib\cli.js:60182:18)
+      at Request.self.callback (D:\universal-tools\Yarn\lib\cli.js:120166:22)
+      at Request.emit (events.js:182:13)
+      at Request.<anonymous> (D:\universal-tools\Yarn\lib\cli.js:121138:10)
+      at Request.emit (events.js:182:13)
+      at IncomingMessage.<anonymous> (D:\universal-tools\Yarn\lib\cli.js:121060:12)
+      at Object.onceWrapper (events.js:273:13)
+      at IncomingMessage.emit (events.js:187:15)
+      at endReadableNT (_stream_readable.js:1092:12)
+      at process._tickCallback (internal/process/next_tick.js:63:19)
 
 npm manifest: 
   {
@@ -32,7 +41,8 @@ npm manifest:
       "typescript": "^3.1.3"
     },
     "dependencies": {
-      "hyperapp": "^1.0.1",
+      "csstype": "^2.5.7",
+      "hyperapp": "^1.2.9",
       "hyperapp-redux-devtools": "^1.1.6",
       "ramda.frompairs": "^0.25.0"
     }
@@ -1977,6 +1987,11 @@ Lockfile:
       clap "^1.0.9"
       source-map "^0.5.3"
   
+  csstype@^2.5.7:
+    version "2.5.7"
+    resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.7.tgz#bf9235d5872141eccfb2d16d82993c6b149179ff"
+    integrity sha512-Nt5VDyOTIIV4/nRFswoCKps1R5CD1hkiyjBE9/thNaNZILLEviVw9yWQw15+O+CpNjQKB/uvdcxFFOrSflY3Yw==
+  
   cycle@1.0.x:
     version "1.0.3"
     resolved "https://registry.yarnpkg.com/cycle/-/cycle-1.0.3.tgz#21e80b2be8580f98b468f379430662b046c34ad2"
@@ -3013,7 +3028,7 @@ Lockfile:
       redux "^3.7.2"
       redux-devtools-extension "^2.13.2"
   
-  hyperapp@^1.0.1:
+  hyperapp@^1.2.9:
     version "1.2.9"
     resolved "https://registry.yarnpkg.com/hyperapp/-/hyperapp-1.2.9.tgz#a17ec09634968a5fa5f6b7d649e7a03d9680fcf2"
     integrity sha512-bIzi12am7pyQ5nc2qnQpN6GWonjdJp+AghY7j9H9L0vccM1OQ3Cqn13cZlmS9KYm91Nf9fwF4KjvbQekFBxHVw==

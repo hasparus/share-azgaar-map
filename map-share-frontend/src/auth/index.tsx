@@ -1,10 +1,12 @@
-import camelCase from 'camelcase';
+import { Dropbox } from 'dropbox';
 import { Component, h } from 'hyperapp';
 
-import { dbx } from './dbx';
 // tslint:disable-next-line:no-import-side-effect
 import './styles.scss';
 
+const DROPBOX_CLIENT_ID = 'mivohghnu5zxdto';
+
+const dbx = new Dropbox({ clientId: DROPBOX_CLIENT_ID, fetch });
 const AUTHENTICATION_URL = dbx.getAuthenticationUrl(`${location.href}auth`);
 
 function parseQueryString(query: string) {
@@ -53,9 +55,18 @@ export type State = typeof state;
 
 export const actions = {
   auth: {
-    parseDropboxQuery: () => {
-      const data = parseQueryString(location.hash);
-      location.hash = '';
+    authorizeWithDropbox: () => {
+      const parsed = parseQueryString(location.hash) as Record<
+        'access_token' | 'account_id' | 'uid' | 'token_type',
+        string
+      >;
+
+      const data = {
+        accessToken: parsed.access_token,
+        accountId: parsed.account_id,
+        uid: parsed.uid,
+      };
+      history.replaceState(null, '', '/');
 
       return { data };
     },
@@ -78,8 +89,8 @@ export const AdminLoginLink: Component<AdminLoginLinkAttrs> = () => (
   </a>
 );
 
-export function handleDropboxAuthQueryString(main: Actions) {
+export function handleAuthQueryString(main: Actions) {
   if (location.pathname === '/auth') {
-    main.auth.parseDropboxQuery();
+    main.auth.authorizeWithDropbox();
   }
 }
