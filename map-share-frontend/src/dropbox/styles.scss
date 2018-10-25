@@ -12,4 +12,8 @@
 .admin-login-link {
   font-size: 0.6em;
   color: #333;
+  
+  &:hover {
+    text-decoration: underline;
+  }
 }
