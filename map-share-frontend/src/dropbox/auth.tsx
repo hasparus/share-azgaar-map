@@ -1,11 +1,29 @@
 import camelCase from 'camelcase';
+import { css } from 'emotion';
 import { Component, h } from 'hyperapp';
 
+import { classNames } from '../utils/classNames';
+
 import { dbx } from './dbx';
-// tslint:disable-next-line:no-import-side-effect
-import './styles.scss';
 
 const AUTHENTICATION_URL = dbx.getAuthenticationUrl(`${location.href}auth`);
+
+const styles = {
+  adminLoginLink: css`
+    font-size: 0.6em;
+    color: #333;
+  `,
+  anchorButton: css`
+  -webkit-appearance: button;
+  -moz-appearance: button;
+  appearance: button;
+  text-decoration: none;
+
+  &:hover {
+    color: inherit;
+  }
+  `
+};
 
 function parseQueryString(query: string) {
   const ret: { [k: string]: string[] | string | null } = Object.create(null);
@@ -66,14 +84,14 @@ export type Actions = typeof actions;
 
 export type LoginButtonAttrs = {};
 export const LoginButton: Component<LoginButtonAttrs> = () => (
-  <a className="anchor-button button button--big" href={AUTHENTICATION_URL}>
+  <a className={classNames(styles.anchorButton, "button", "button--big")} href={AUTHENTICATION_URL}>
     Login
   </a>
 );
 
 export type AdminLoginLinkAttrs = {};
 export const AdminLoginLink: Component<AdminLoginLinkAttrs> = () => (
-  <a className="admin-login-link" href={AUTHENTICATION_URL}>
+  <a className={styles.adminLoginLink} href={AUTHENTICATION_URL}>
     admin
   </a>
 );
