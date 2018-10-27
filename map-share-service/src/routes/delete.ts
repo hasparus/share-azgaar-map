@@ -9,7 +9,8 @@ export const deleteHandler: RequestHandler = async (req, res) => {
     req
   )) as dataTransfer.DeleteRequestBody;
 
-  if (isAdminId(accountId)) {
+  const isAdmin = await isAdminId(accountId);
+  if (isAdmin) {
     dbx.filesDeleteBatch({
       entries: paths.map(path => ({ path })),
     });
@@ -17,5 +18,5 @@ export const deleteHandler: RequestHandler = async (req, res) => {
     return { msg: 'ok' };
   }
 
-  return send(res, 403, { msg: 'user is not an admin' });
+  return send(res, 403, { msg: 'user is not allowed to delete maps' });
 };

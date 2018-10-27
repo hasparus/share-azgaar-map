@@ -2984,10 +2984,9 @@ hyperapp-redux-devtools@^1.1.6:
     redux "^3.7.2"
     redux-devtools-extension "^2.13.2"
 
-hyperapp@^1.2.9:
+hyperapp@jorgebucaran/hyperapp.git#0d23a35a65b23e8dfa5cac15d3d166bac18d51b1:
   version "1.2.9"
-  resolved "https://registry.yarnpkg.com/hyperapp/-/hyperapp-1.2.9.tgz#a17ec09634968a5fa5f6b7d649e7a03d9680fcf2"
-  integrity sha512-bIzi12am7pyQ5nc2qnQpN6GWonjdJp+AghY7j9H9L0vccM1OQ3Cqn13cZlmS9KYm91Nf9fwF4KjvbQekFBxHVw==
+  resolved "https://codeload.github.com/jorgebucaran/hyperapp/tar.gz/0d23a35a65b23e8dfa5cac15d3d166bac18d51b1"
 
 i@0.3.x:
   version "0.3.6"

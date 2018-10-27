@@ -44,23 +44,33 @@ export const actions = {
   },
   uploadMaps: () => (st: State, acts: Actions) => {
     openFileUploadDialog({ accept: '.map' }).then(event => {
-      const { files } = event.target;
-      if (files) {
+      const files = Array.prototype.filter.call(
+        event.target.files || [],
+        (f: File) => f.name.endsWith('.map')
+      );
+      if (files.length) {
         uploadFiles(files).then(uploaded => {
           acts.setState({ maps: st.maps.concat(uploaded.maps) });
         });
       } else {
-        console.error('No files selected!');
+        acts.setState({ errorMsg: 'No files selected' });
       }
     });
   },
-  deleteMaps: (paths: string[]) => (st: State, acts: Actions) => {
-    deleteFiles(paths).then(() => {
-      const pathsSet = new Set(paths);
-      acts.setState({
-        maps: st.maps.filter(m => !pathsSet.has(m.path)),
+  deleteMaps: (paths: string[]) => (
+    { auth: { data }, maps }: State,
+    acts: Actions
+  ) => {
+    deleteFiles(paths, data ? data.accountId : '')
+      .then(() => {
+        const pathsSet = new Set(paths);
+        acts.setState({
+          maps: maps.filter(m => !pathsSet.has(m.path)),
+        });
+      })
+      .catch((err: { msg: string }) => {
+        acts.setState({ errorMsg: err.msg });
       });
-    });
   },
 };
 
@@ -70,7 +80,6 @@ export const view: View<State, Actions> = (st, acts) => (
   <article>
     <main>
       <Maps maps={st.maps} deleteMaps={acts.deleteMaps} />
-      <ErrorMessage msg={st.errorMsg} />
       <section
         style={{
           position: 'absolute',
@@ -84,6 +93,7 @@ export const view: View<State, Actions> = (st, acts) => (
         {FEATURE_LOGIN && <auth.LoginButton />}
       </section>
     </main>
+    <ErrorMessage msg={st.errorMsg} />
     <footer className="footer">
       <auth.AdminLoginLink />
     </footer>

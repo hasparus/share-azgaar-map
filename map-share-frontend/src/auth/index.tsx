@@ -49,7 +49,7 @@ function parseQueryString(query: string) {
 
 export const state = {
   auth: {
-    data: undefined,
+    data: undefined as { accountId: string } | undefined,
     isAdmin: undefined as boolean | undefined,
   },
 };
@@ -60,7 +60,7 @@ type AuthState = State['auth'];
 export const actions = {
   auth: {
     setState: (diff: Partial<AuthState>) => diff,
-    authorizeWithDropbox: () => async (_: AuthState, acts: AuthActions) => {
+    authorizeWithDropbox: () => (_: AuthState, acts: AuthActions) => {
       const parsed = parseQueryString(location.hash) as Record<
         'access_token' | 'account_id' | 'uid' | 'token_type',
         string
@@ -68,8 +68,10 @@ export const actions = {
 
       history.replaceState(undefined, '', '/');
 
-      const isAdmin = await authorize(parsed.account_id);
-      acts.setState(isAdmin);
+      const accountId = parsed.account_id;
+      authorize(accountId).then(acts.setState);
+
+      return { data: { accountId } };
     },
   },
 };
@@ -84,16 +86,6 @@ export const LoginButton: Component<LoginButtonAttrs> = () => (
 
 export type AdminLoginLinkAttrs = {};
 
-declare namespace hyperapp {
-  export interface View<State, Actions> {
-    // tslint:disable-next-line:callable-types
-    (state: State, actions: Actions): VNode<object> | null;
-  }
-}
-
-// tslint:disable-next-line:no-any
-const HYPERAPP_NULL = null as any;
-
 export const AdminLoginLink: Component<
   AdminLoginLinkAttrs,
   State
@@ -106,7 +98,7 @@ export const AdminLoginLink: Component<
         </a>
       );
     case false:
-      return HYPERAPP_NULL;
+      return null;
     case true:
       return (
         <span

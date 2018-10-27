@@ -4,3 +4,4 @@
 **/.cache
 **/dist
 **/yarn-error.log
+.todo
