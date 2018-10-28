@@ -6,6 +6,6 @@
     "rootDir": ".",
     "outDir": "."
   },
-  "include": ["*.ts", "../map-share-frontend/src/auth/AdminLoginLink.tsx", "../map-share-frontend/src/auth/authenticationUrl.tsx", "../map-share-frontend/src/auth/LoginButton.tsx", "../map-share-frontend/src/auth/index.tsx", "../map-share-frontend/src/auth/auth.tsx", "../map-share-frontend/src/auth.tsx", "../map-share-frontend/src/auth/auth.tsx"],
+  "include": ["*.ts"],
   "exclude": ["*.js", "*.d.ts"]
 }
