@@ -9,7 +9,7 @@ import {
   openHandler,
   rootHandler,
   uploadHandler,
-} from './routes';
+} from './handlers';
 
 const handler: RequestHandler = async (req, res) => {
   switch (req.url) {
