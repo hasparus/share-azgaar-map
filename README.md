@@ -14,15 +14,18 @@ Pulls map generator.
 
 Serves map generator and launches service and frontend dev servers.
 
+#### process.env.IP
+
+Test on local network.
+
+```
+  yarn cross-env IP="192.168.137.1" yarn dev c f s
+```
+
 ## 🔍 About and todo lists
 
 - `/azgaars-map-generator` **[submodule]** <- my fork of azgaar's map generator
   - Added map upload from link in query -- `?maplink=<link-to-map>`
 - `/map-share-service` <- uploads maps and generates access links \
    _Needs `DROPBOX_ACCESS_TOKEN` in `process.env`._
-  - [ ] generates permanent short links
 - `/map-share-frontend` <- catalog of maps uploaded with the app
-  - [x] gets maps from backend
-  - [x] uploads maps
-  - [ ] admin logs in with his dropbox account
-    - [ ] deletes maps
