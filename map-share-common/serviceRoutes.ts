@@ -3,5 +3,5 @@ export enum ServiceRoutes {
   Upload = '/upload',
   Delete = '/delete',
   Authorize = '/authorize',
-  OpenMap = '/m',
+  Open = '/m',
 }

@@ -2,5 +2,6 @@ export declare enum ServiceRoutes {
     Root = "/",
     Upload = "/upload",
     Delete = "/delete",
-    Authorize = "/authorize"
+    Authorize = "/authorize",
+    Open = "/m"
 }

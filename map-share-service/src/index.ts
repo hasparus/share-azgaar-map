@@ -6,6 +6,7 @@ import { ServiceRoutes } from '../../map-share-common';
 import {
   authorizeHandler,
   deleteHandler,
+  openHandler,
   rootHandler,
   uploadHandler,
 } from './routes';
@@ -21,6 +22,10 @@ const handler: RequestHandler = async (req, res) => {
     case ServiceRoutes.Authorize:
       return authorizeHandler(req, res);
     default:
+      if ((req.url || '').startsWith(ServiceRoutes.Open)) {
+        return openHandler(req, res);
+      }
+
       return { url: req.url };
   }
 };
