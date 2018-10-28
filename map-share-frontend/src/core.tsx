@@ -1,4 +1,4 @@
-import { h, View, VNode } from 'hyperapp';
+import { h, View } from 'hyperapp';
 
 import { Map, SERVICE_URL } from '../../map-share-common';
 
