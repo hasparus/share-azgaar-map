@@ -4,7 +4,7 @@ import { makeMapUrl } from '../makeMapUrl';
 
 const HTTP_FOUND = 302;
 
-// opens map by name
+// opens map by name -- {url}/m/{map-name}.map
 export const openHandler: RequestHandler = (req, res) => {
   const hash = ((req.url || '').match(/m(.*)/) || [])[1];
   if (hash) {
@@ -22,6 +22,6 @@ export const openHandler: RequestHandler = (req, res) => {
         send(res, err.response.status, err.error);
       });
   } else {
-    send(res, 404, 'Map not found: ID missing.');
+    send(res, 404, 'Map not found: Name missing.');
   }
 };
