@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "micro",
+    "start": "micro build/index.js",
     "build": "tsc",
     "d:tsc": "yarn tsc --watch",
     "d:micro": "yarn micro-dev build/index.js --watch build",
