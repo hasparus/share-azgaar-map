@@ -4,7 +4,8 @@ var urls;
 if (process.env.NODE_ENV !== 'production') {
     urls = {
         GENERATOR_URL: 'http://localhost:5000',
-        SERVICE_URL: 'http://localhost:3000',
+        // tslint:disable-next-line:no-http-string
+        SERVICE_URL: "http://" + (process.env.IP || 'localhost') + ":3000",
     };
 }
 else {

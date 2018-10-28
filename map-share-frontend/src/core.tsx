@@ -79,7 +79,10 @@ export type Actions = typeof actions;
 export const view: View<State, Actions> = (st, acts) => (
   <article>
     <main>
-      <Maps maps={st.maps} deleteMaps={acts.deleteMaps} />
+      <Maps
+        maps={st.maps}
+        deleteMaps={st.auth.isAdmin ? acts.deleteMaps : null}
+      />
       <section
         style={{
           position: 'absolute',

@@ -8,7 +8,7 @@ import { RemoveButton } from './RemoveButton';
 
 export const Maps: Component<{
   maps: Map[];
-  deleteMaps: Actions['deleteMaps'];
+  deleteMaps: null | Actions['deleteMaps'];
 }> = ({ maps, deleteMaps }) => (
   <section>
     <h1 style={{ marginBottom: 0 }}>Maps</h1>
@@ -16,12 +16,14 @@ export const Maps: Component<{
       {maps.map(map => (
         <article>
           <MapLink {...map} />
-          <RemoveButton
-            style={{
-              marginLeft: '15px',
-            }}
-            onclick={() => deleteMaps([map.path])}
-          />
+          {deleteMaps && (
+            <RemoveButton
+              style={{
+                marginLeft: '15px',
+                }}
+              onclick={() => deleteMaps([map.path])}
+            />
+          )}
         </article>
       ))}
     </div>
