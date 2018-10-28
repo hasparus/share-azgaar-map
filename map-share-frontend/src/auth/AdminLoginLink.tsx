@@ -7,11 +7,14 @@ import { State } from './index';
 const adminLoginLinkStyles = css`
   font-size: 0.6em;
   color: #333;
+  text-decoration: none;
 
   &:hover {
+    color: #333;
     text-decoration: underline;
   }
 `;
+
 export type AdminLoginLinkAttrs = {};
 export const AdminLoginLink: Component<
   AdminLoginLinkAttrs,

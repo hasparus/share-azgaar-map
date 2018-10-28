@@ -1,11 +1,9 @@
-import { h, View, VNode } from 'hyperapp';
+import { h, View } from 'hyperapp';
 
 import { Map, SERVICE_URL } from '../../map-share-common';
 
 import { deleteFiles, uploadFiles } from './api';
 import * as auth from './auth';
-import * as LoginButtonAttrs from "./LoginButtonAttrs";
-import * as adminLoginLinkStyles from "./adminLoginLinkStyles";
 import { FEATURE_LOGIN } from './env';
 import { ErrorMessage } from './ErrorMessage';
 import { Maps } from './Maps';
@@ -95,12 +93,12 @@ export const view: View<State, Actions> = (st, acts) => (
         }}
       >
         <UploadButton onclick={acts.uploadMaps} />
-        {FEATURE_LOGIN && <LoginButtonAttrs.LoginButton />}
+        {FEATURE_LOGIN && <auth.LoginButton />}
       </section>
     </main>
     <ErrorMessage msg={st.errorMsg} />
     <footer className="footer">
-      <adminLoginLinkStyles.AdminLoginLink />
+      <auth.AdminLoginLink />
     </footer>
   </article>
 );
