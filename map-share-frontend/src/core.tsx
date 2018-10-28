@@ -4,6 +4,8 @@ import { Map, SERVICE_URL } from '../../map-share-common';
 
 import { deleteFiles, uploadFiles } from './api';
 import * as auth from './auth';
+import * as LoginButtonAttrs from "./LoginButtonAttrs";
+import * as adminLoginLinkStyles from "./adminLoginLinkStyles";
 import { FEATURE_LOGIN } from './env';
 import { ErrorMessage } from './ErrorMessage';
 import { Maps } from './Maps';
@@ -93,12 +95,12 @@ export const view: View<State, Actions> = (st, acts) => (
         }}
       >
         <UploadButton onclick={acts.uploadMaps} />
-        {FEATURE_LOGIN && <auth.LoginButton />}
+        {FEATURE_LOGIN && <LoginButtonAttrs.LoginButton />}
       </section>
     </main>
     <ErrorMessage msg={st.errorMsg} />
     <footer className="footer">
-      <auth.AdminLoginLink />
+      <adminLoginLinkStyles.AdminLoginLink />
     </footer>
   </article>
 );

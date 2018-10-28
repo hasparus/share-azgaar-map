@@ -1,15 +1,4 @@
-import { Dropbox } from 'dropbox';
-import { Component, h, VNode } from 'hyperapp';
-
 import { authorize } from '../api';
-
-// tslint:disable-next-line:no-import-side-effect
-import './styles.scss';
-
-const DROPBOX_CLIENT_ID = 'mivohghnu5zxdto';
-
-const dbx = new Dropbox({ clientId: DROPBOX_CLIENT_ID, fetch });
-const AUTHENTICATION_URL = dbx.getAuthenticationUrl(`${location.href}auth`);
 
 function parseQueryString(query: string) {
   const ret: { [k: string]: string[] | string | null } = Object.create(null);
@@ -54,7 +43,7 @@ export const state = {
   },
 };
 
-type State = typeof state;
+export type State = typeof state;
 type AuthState = State['auth'];
 
 export const actions = {
@@ -77,45 +66,11 @@ export const actions = {
 };
 
 type AuthActions = typeof actions['auth'];
-export type LoginButtonAttrs = {};
-export const LoginButton: Component<LoginButtonAttrs> = () => (
-  <a className="anchor-button button button--big" href={AUTHENTICATION_URL}>
-    Login
-  </a>
-);
-
-export type AdminLoginLinkAttrs = {};
-
-export const AdminLoginLink: Component<
-  AdminLoginLinkAttrs,
-  State
-> = () => st => {
-  switch (st.auth.isAdmin) {
-    case undefined:
-      return (
-        <a className="admin-login-link" href={AUTHENTICATION_URL}>
-          admin
-        </a>
-      );
-    case false:
-      return null;
-    case true:
-      return (
-        <span
-          style={{
-            fontSize: '0.6em',
-          }}
-        >
-          logged in
-        </span>
-      );
-    default:
-      throw Error('invalid state');
-  }
-};
-
 export function handleAuthQueryString(main: typeof actions) {
   if (location.pathname === '/auth') {
     main.auth.authorizeWithDropbox();
   }
 }
+
+export * from './LoginButton';
+export * from './AdminLoginLink';
