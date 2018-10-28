@@ -1,10 +1,12 @@
 let urls;
 
 if (process.env.NODE_ENV !== 'production') {
+  const host = process.env.IP || 'localhost';
   urls = {
-    GENERATOR_URL: 'http://localhost:5000',
-    // tslint:disable-next-line:no-http-string
-    SERVICE_URL: `http://${process.env.IP || 'localhost'}:3000`,
+    // tslint:disable:no-http-string
+    GENERATOR_URL: `http://${host}:5000`,
+    SERVICE_URL: `http://${host}:3000`,
+    // tslint:enable:no-http-string
   };
 } else {
   urls = {
