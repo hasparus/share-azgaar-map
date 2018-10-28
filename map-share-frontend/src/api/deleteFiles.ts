@@ -1,10 +1,23 @@
-import { SERVICE_URL } from '../../../map-share-common';
+import {
+  dataTransfer,
+  SERVICE_URL,
+  ServiceRoutes,
+} from '../../../map-share-common';
+import { Maps } from '../../../map-share-common/dataTransfer';
 
-export function deleteFiles(paths: string[]) {
-  const body = { paths };
+export async function deleteFiles(paths: string[], accountId: string) {
+  const body: dataTransfer.DeleteRequestBody = { paths, accountId };
 
-  return fetch(`${SERVICE_URL}/delete`, {
+  const response = await fetch(SERVICE_URL + ServiceRoutes.Delete, {
     body: JSON.stringify(body),
     method: 'POST',
-  }).then(response => response.json());
+  });
+
+  const json = await response.json();
+
+  if (response.ok) {
+    return json as Maps;
+  } else {
+    throw json as { msg: string };
+  }
 }

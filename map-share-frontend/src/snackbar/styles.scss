@@ -1,0 +1,17 @@
+:root {
+  --red: #ee1111;
+}
+
+.snackbar {
+  border: 2px solid black;
+  background: var(--yellow);
+
+  position: absolute;
+  top: 1em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.snackbar--error {
+  background: var(--red);
+}

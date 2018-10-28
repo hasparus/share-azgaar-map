@@ -3,12 +3,15 @@ import { h, View } from 'hyperapp';
 import { Map, SERVICE_URL } from '../../map-share-common';
 
 import { deleteFiles, uploadFiles } from './api';
+import * as auth from './auth';
+import { FEATURE_LOGIN } from './env';
 import { ErrorMessage } from './ErrorMessage';
 import { Maps } from './Maps';
-import { openFileUploadDialog } from './openFileUploadDialog';
 import { UploadButton } from './UploadButton';
+import { openFileUploadDialog } from './utils/openFileUploadDialog';
 
 export const state = {
+  ...auth.state,
   maps: [] as Map[],
   errorMsg: null as string | null,
 };
@@ -16,6 +19,7 @@ export const state = {
 export type State = typeof state;
 
 export const actions = {
+  ...auth.actions,
   setState: (diff: Partial<State>) => {
     return diff;
   },
@@ -40,32 +44,61 @@ export const actions = {
   },
   uploadMaps: () => (st: State, acts: Actions) => {
     openFileUploadDialog({ accept: '.map' }).then(event => {
-      const { files } = event.target;
-      if (files) {
+      const files = Array.prototype.filter.call(
+        event.target.files || [],
+        (f: File) => f.name.endsWith('.map')
+      );
+      if (files.length) {
         uploadFiles(files).then(uploaded => {
           acts.setState({ maps: st.maps.concat(uploaded.maps) });
         });
       } else {
-        console.error('No files selected!');
+        acts.setState({ errorMsg: 'No files selected' });
       }
     });
   },
-  deleteMaps: (paths: string[]) => (st: State, acts: Actions) => {
-    deleteFiles(paths).then(() => {
-      const pathsSet = new Set(paths);
-      acts.setState({
-        maps: st.maps.filter(m => !pathsSet.has(m.path)),
+  deleteMaps: (paths: string[]) => (
+    { auth: { data }, maps }: State,
+    acts: Actions
+  ) => {
+    deleteFiles(paths, data ? data.accountId : '')
+      .then(() => {
+        const pathsSet = new Set(paths);
+        acts.setState({
+          maps: maps.filter(m => !pathsSet.has(m.path)),
+        });
+      })
+      .catch((err: { msg: string }) => {
+        acts.setState({ errorMsg: err.msg });
       });
-    });
   },
 };
 
 export type Actions = typeof actions;
 
 export const view: View<State, Actions> = (st, acts) => (
-  <section>
-    <Maps maps={st.maps} deleteMaps={acts.deleteMaps} />
-    <UploadButton onclick={acts.uploadMaps} />
+  <article>
+    <main>
+      <Maps
+        maps={st.maps}
+        deleteMaps={st.auth.isAdmin ? acts.deleteMaps : null}
+      />
+      <section
+        style={{
+          position: 'absolute',
+          bottom: 0,
+          display: 'grid',
+          gridTemplateColumns: '1fr 1fr',
+          columnGap: '1em',
+        }}
+      >
+        <UploadButton onclick={acts.uploadMaps} />
+        {FEATURE_LOGIN && <auth.LoginButton />}
+      </section>
+    </main>
     <ErrorMessage msg={st.errorMsg} />
-  </section>
+    <footer className="footer">
+      <auth.AdminLoginLink />
+    </footer>
+  </article>
 );

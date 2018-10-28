@@ -1,19 +1,29 @@
 import { RequestHandler } from 'micro';
 import cors from 'micro-cors';
 
-import { rootHandler, uploadHandler, deleteHandler } from './routes';
+import { ServiceRoutes } from '../../map-share-common';
+
+import {
+  authorizeHandler,
+  deleteHandler,
+  rootHandler,
+  uploadHandler,
+} from './routes';
 
 const handler: RequestHandler = async (req, res) => {
   switch (req.url) {
-    case '/':
+    case ServiceRoutes.Root:
       return rootHandler(req, res);
-    case '/upload':
+    case ServiceRoutes.Upload:
       return uploadHandler(req, res);
-    case '/delete':
+    case ServiceRoutes.Delete:
       return deleteHandler(req, res);
+    case ServiceRoutes.Authorize:
+      return authorizeHandler(req, res);
     default:
-      return req.url;
+      return { url: req.url };
   }
 };
 
+// tslint:disable-next-line:no-default-export
 export default cors()(handler);

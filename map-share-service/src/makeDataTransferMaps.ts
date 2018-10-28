@@ -1,6 +1,6 @@
 import { dataTransfer, GENERATOR_URL } from '../../map-share-common';
 
-import dbx from './peripherals/dropbox';
+import { dbx } from './peripherals/dropbox';
 
 async function makeMapUrl(path: string) {
   const { link } = await dbx.filesGetTemporaryLink({

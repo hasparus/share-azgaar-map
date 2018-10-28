@@ -4,7 +4,7 @@ import { upload } from 'micro-upload';
 
 import { dataTransfer } from '../../../map-share-common';
 import { makeDataTransferMaps } from '../makeDataTransferMaps';
-import dbx from '../peripherals/dropbox';
+import { dbx } from '../peripherals/dropbox';
 
 declare module 'micro' {
   export function send<T>(res: ServerResponse, code: number, data?: T): T;
@@ -30,7 +30,8 @@ export const uploadHandler: RequestHandler = upload(
           return dbx.filesUpload({
             path: `/${name}`,
             contents: data,
-            mode: { '.tag': 'overwrite' },
+            autorename: true,
+            mode: { '.tag': 'add' },
           });
         })
       );

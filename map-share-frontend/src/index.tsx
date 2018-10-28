@@ -1,5 +1,6 @@
 import { app } from 'hyperapp';
 
+import { handleAuthQueryString } from './auth';
 import { Actions, actions, State, state, view } from './core';
 
 // tslint:disable-next-line:no-import-side-effect
@@ -24,3 +25,4 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 main.getMaps();
+handleAuthQueryString(main);

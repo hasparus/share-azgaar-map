@@ -8,6 +8,8 @@ const pkg = require('../package.json');
 
 const colors = ['green', 'blue', 'magenta', 'cyan', 'white', 'yellow'];
 
+const CATEGORY_PREFIX = 'd:';
+
 const args = process.argv.slice(2);
 
 let commands;
@@ -27,7 +29,7 @@ if (args.length) {
     .filter(x => x);
 } else {
   commands = Object.keys(pkg.scripts)
-    .filter(x => x.startsWith('d:'))
+    .filter(x => x.startsWith(CATEGORY_PREFIX))
     .map((command, index) => ({
       command: 'npm:'.concat(command),
       name: command.slice(2, 4),
