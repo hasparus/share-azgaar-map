@@ -5,7 +5,7 @@
     "dev": "parcel ./src/index.html",
     "prebuild": "rm -rf dist",
     "build": "parcel build ./src/index.html",
-    "deploy": "cp now.json dist && cd dist && now && now alias && now rm map-share-frontend --safe --yes"
+    "deploy": "cp now.json dist && cd dist && cp index.html 404.html && now && now alias && now rm map-share-frontend --safe --yes"
   },
   "devDependencies": {
     "@types/camelcase": "^4.1.0",
