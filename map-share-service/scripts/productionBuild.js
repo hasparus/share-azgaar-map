@@ -34,15 +34,15 @@ async function makeProductionBuild() {
   await exec.parallel([`mkdir ${deployDir}`, `cd ${rootDir} && yarn build`]);
 
   const common = path.join(deployDir, 'map-share-common');
-  const build = path.join(deployDir, 'map-share-service');
+  const service = path.join(deployDir, 'map-share-service');
 
   await Promise.all([
     makePkgJson(),
 
     exec([
-      exec.parallel([`mkdir ${common}`, `mkdir ${build}`]),
+      exec.parallel([`mkdir ${common}`, `mkdir ${service}`]),
       exec.parallel([
-        `cp -rf ${rootDir}/build ${build}`,
+        `cp -rf ${rootDir}/build ${service}`,
         `cp ${path.join(rootDir, '..', 'map-share-common')}/*.js ${common}`,
       ]),
     ]),
