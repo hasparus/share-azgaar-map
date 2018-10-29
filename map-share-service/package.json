@@ -9,7 +9,8 @@
     "build": "tsc",
     "d:tsc": "yarn tsc --watch",
     "d:micro": "yarn micro-dev build/index.js --watch build",
-    "dev": "concurrently --restart-tries 50 -c cyan,green npm:d:tsc npm:d:micro"
+    "dev": "concurrently --restart-tries 50 -c cyan,green npm:d:tsc npm:d:micro",
+    "makeProductionBuild": "node ./scripts/productionBuild"
   },
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.34",
@@ -29,5 +30,10 @@
     "micro": "^9.3.3",
     "micro-cors": "^0.1.1",
     "micro-upload": "^1.0.1"
+  },
+  "now": {
+    "alias": [
+      "map-share-service.now.sh"
+    ]
   }
 }
