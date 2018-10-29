@@ -31,6 +31,9 @@ function makePkgJson() {
 }
 
 async function makeProductionBuild() {
+  if (fs.existsSync(deployDir)) {
+    await exec(`rm -rf ${deployDir}`);
+  }
   await exec.parallel([`mkdir ${deployDir}`, `cd ${rootDir} && yarn build`]);
 
   const common = path.join(deployDir, 'map-share-common');
