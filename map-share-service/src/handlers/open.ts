@@ -4,11 +4,11 @@ import { makeMapUrl } from '../makeMapUrl';
 
 const HTTP_FOUND = 302;
 
-// opens map by name -- {url}/m/{map-name}.map
+// opens map by name -- {url}/{map-name}.map
 export const openHandler: RequestHandler = (req, res) => {
-  const hash = ((req.url || '').match(/m(.*)/) || [])[1];
-  if (hash) {
-    makeMapUrl(hash)
+  const path = req.url;
+  if (path) {
+    makeMapUrl(path)
       .then(url => {
         res.writeHead(HTTP_FOUND, {
           Location: url,
@@ -19,7 +19,13 @@ export const openHandler: RequestHandler = (req, res) => {
       .catch((err: DropboxTypes.Error<string> & { response: Response }) => {
         // tslint:disable-next-line:no-console
         console.error(err);
-        send(res, err.response.status, err.error);
+        const status = err.response.status;
+
+        if (status === 404 || status === 409) {
+          send(res, 404, `Map with name "${path}" not found.`);
+        } else {
+          send(res, status, err.error);
+        }
       });
   } else {
     send(res, 404, 'Map not found: Name missing.');

@@ -22,7 +22,7 @@ const handler: RequestHandler = async (req, res) => {
     case ServiceRoutes.Authorize:
       return authorizeHandler(req, res);
     default:
-      if ((req.url || '').startsWith(ServiceRoutes.Open)) {
+      if ((req.url || '').endsWith('.map')) {
         return openHandler(req, res);
       }
 
