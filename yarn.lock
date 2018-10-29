@@ -2546,6 +2546,11 @@ execa@^0.8.0:
     signal-exit "^3.0.0"
     strip-eof "^1.0.0"
 
+executive@^1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/executive/-/executive-1.6.3.tgz#3e9712ca5a3f3ca013e1a51b411718dad0226b11"
+  integrity sha512-rXF6Kkqsyw6MDh8iYMGykA7b6awkXiMfoXcByWK3Fjvyw4xWCvkAU9qyKNOjLUt2NGl6RXjdJXQGw2dgPid8dQ==
+
 expand-brackets@^0.1.4:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/expand-brackets/-/expand-brackets-0.1.5.tgz#df07284e342a807cd733ac5af72411e581d1177b"

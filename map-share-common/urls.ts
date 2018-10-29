@@ -10,8 +10,8 @@ if (process.env.NODE_ENV !== 'production') {
   };
 } else {
   urls = {
-    GENERATOR_URL: '???',
-    SERVICE_URL: '???',
+    GENERATOR_URL: 'https://hasparus.github.io/Fantasy-Map-Generator/',
+    SERVICE_URL: 'https://map-share-service.now.sh',
   };
 }
 

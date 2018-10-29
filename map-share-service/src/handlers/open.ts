@@ -22,6 +22,6 @@ export const openHandler: RequestHandler = (req, res) => {
         send(res, err.response.status, err.error);
       });
   } else {
-    send(res, 404, 'Map not found: ID missing.');
+    send(res, 404, 'Map not found: Name missing.');
   }
 };

@@ -1,0 +1,6 @@
+{
+  "type": "static",
+  "name": "map-share-frontend",
+  "alias": "map-share.now.sh",
+  "public": true
+}
