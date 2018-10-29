@@ -36,5 +36,5 @@ now secrets add DROPBOX_ACCESS_TOKEN "access-token"
   - Added map upload from link in query -- `?maplink=<link-to-map>`
 - `/map-share-service` <- uploads maps and generates access links \
    _Needs `DROPBOX_ACCESS_TOKEN` in `process.env`._
-  - permalinks for maps on dropbox -- `/m/map-name.map`
+  - permalinks for maps on dropbox -- `<url>/<map-name>.map`
 - `/map-share-frontend` <- catalog of maps uploaded with the app
