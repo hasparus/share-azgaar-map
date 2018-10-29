@@ -12,7 +12,7 @@
     "d:micro": "yarn micro-dev build/index.js --watch build",
     "dev": "concurrently --restart-tries 50 -c cyan,green npm:d:tsc npm:d:micro",
     "makeProductionBuild": "node ./scripts/productionBuild",
-    "deploy": "node ./scripts/deploy"
+    "deploy": "yarn makeProductionBuild && node ./scripts/deploy"
   },
   "devDependencies": {
     "@types/isomorphic-fetch": "^0.0.34",
