@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "start": "micro build/index.js",
-    "build": "tsc",
+    "build": "tsc --build",
     "d:tsc": "yarn tsc --watch",
     "d:micro": "yarn micro-dev build/index.js --watch build",
     "dev": "concurrently --restart-tries 50 -c cyan,green npm:d:tsc npm:d:micro",
