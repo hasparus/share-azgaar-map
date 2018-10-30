@@ -1,12 +1,16 @@
-import { RequestHandler, send } from 'micro';
+import { IncomingMessage, ServerResponse } from 'http';
+import { send } from 'micro';
 
 import { makeMapUrl } from '../makeMapUrl';
 
 const HTTP_FOUND = 302;
 
 // opens map by name -- {url}/{map-name}.map
-export const openHandler: RequestHandler = (req, res) => {
-  const path = req.url;
+export const openHandler = (
+  req: IncomingMessage,
+  res: ServerResponse,
+  path: string
+) => {
   if (path) {
     makeMapUrl(path)
       .then(url => {
