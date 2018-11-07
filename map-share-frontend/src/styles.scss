@@ -19,30 +19,7 @@ body {
   margin: 0;
 }
 
-main {
-  background: var(--yellow);
-  padding: 1em;
-  width: 80vw;
-  min-height: 300px;
-
-  position: relative;
-}
-
-h1 {
-  font-weight: normal;
-}
-
-a {
-  color: black;
-  font-family: inherit;
-
-  &:hover {
-    color: var(--blue);
-  }
-}
-
-.button,
-button {
+.button {
   border: 1px black solid;
   font-family: inherit;
   font-size: inherit;
@@ -70,7 +47,7 @@ button {
   box-sizing: content-box;
 
   &:hover {
-    transform: translateY(3px);
+    transform: translateY(2px);
     box-shadow: 1px 1px 0 0 black;
   }
 }

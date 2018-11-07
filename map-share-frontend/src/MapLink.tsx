@@ -6,7 +6,7 @@ import { Map } from '../../map-share-common';
 import { Component } from './Component';
 
 export const MapLink: Component<Map> = ({ path, temporaryLink }) => (
-  <a href={temporaryLink} key={path}>
+  <a href={temporaryLink} key={path} title={path}>
     {path}
   </a>
 );

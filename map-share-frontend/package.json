@@ -12,6 +12,7 @@
     "@types/ramda": "^0.25.39",
     "babel-core": "^6.26.3",
     "babel-plugin-emotion": "^9.2.11",
+    "csstype": "^2.5.7",
     "executive": "^1.6.3",
     "hyperapp-redux-devtools": "^1.1.6",
     "parcel": "^1.10.3",
