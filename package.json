@@ -8,7 +8,8 @@
     "d:frontend": "yarn workspace map-share-frontend dev",
     "d:generator": "yarn workspace azgaars-map-generator start",
     "d:service": "yarn workspace map-share-service dev",
-    "dev": "node ./scripts/dev.js"
+    "dev": "node ./scripts/dev.js",
+    "commit": "npx gitmoji -c"
   },
   "workspaces": [
     "map-share-frontend",
