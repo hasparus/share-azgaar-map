@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@types/camelcase": "4.1.0",
-    "@types/ramda": "0.25.39",
+    "@types/ramda": "0.25.41",
     "babel-core": "6.26.3",
     "babel-plugin-emotion": "9.2.11",
     "csstype": "2.5.7",
