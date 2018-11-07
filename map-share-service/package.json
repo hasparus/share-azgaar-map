@@ -15,22 +15,22 @@
     "deploy": "yarn makeProductionBuild && node ./scripts/deploy"
   },
   "devDependencies": {
-    "@types/isomorphic-fetch": "^0.0.34",
-    "@types/micro": "^7.3.2",
-    "@types/micro-cors": "^0.1.0",
-    "@types/node": "^10.12.0",
-    "concurrently": "^4.0.1",
-    "forever": "^0.15.3",
-    "micro-dev": "^3.0.0",
-    "sass": "^1.14.2",
-    "typescript": "^3.1.3"
+    "@types/isomorphic-fetch": "0.0.34",
+    "@types/micro": "7.3.2",
+    "@types/micro-cors": "0.1.0",
+    "@types/node": "10.12.0",
+    "concurrently": "4.0.1",
+    "forever": "0.15.3",
+    "micro-dev": "3.0.0",
+    "sass": "1.14.2",
+    "typescript": "3.1.3"
   },
   "dependencies": {
-    "@types/express-fileupload": "^0.4.0",
-    "dropbox": "^4.0.12",
-    "isomorphic-fetch": "^2.2.1",
-    "micro": "^9.3.3",
-    "micro-cors": "^0.1.1",
-    "micro-upload": "^1.0.1"
+    "@types/express-fileupload": "0.4.0",
+    "dropbox": "4.0.12",
+    "isomorphic-fetch": "2.2.1",
+    "micro": "9.3.3",
+    "micro-cors": "0.1.1",
+    "micro-upload": "1.0.1"
   }
 }
