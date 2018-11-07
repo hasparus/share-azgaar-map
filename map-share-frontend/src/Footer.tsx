@@ -1,5 +1,5 @@
 import { css } from 'emotion';
-import { h, VNode } from 'hyperapp';
+import { h } from 'hyperapp';
 
 import { Component } from './Component';
 
@@ -8,6 +8,7 @@ const footerStyle = css`
   margin: 1em;
   display: flex;
   justify-content: center;
+  align-items: center;
 `;
 
 const footerItemStyle = css`
