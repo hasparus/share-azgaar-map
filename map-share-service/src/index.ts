@@ -13,7 +13,9 @@ import {
 
 const handler: RequestHandler = async (req, res) => {
   const url = req.url || '';
-  switch (url) {
+  const [pathname, _search] = url.split('?');
+
+  switch (pathname) {
     case ServiceRoutes.Root:
       return rootHandler(req, res);
     case ServiceRoutes.Upload:
@@ -23,7 +25,6 @@ const handler: RequestHandler = async (req, res) => {
     case ServiceRoutes.Authorize:
       return authorizeHandler(req, res);
     default:
-      const [pathname, _search] = url.split('?');
       if (pathname.endsWith('.map')) {
         return openHandler(req, res, pathname);
       }
