@@ -1,0 +1,22 @@
+html,
+body {
+  height: 100%;
+}
+
+html {
+  background: #eeeeee;
+  color: black;
+  font-family: 'PT Mono', monospace;
+  font-size: 20px;
+}
+
+body {
+  margin: 0;
+}
+
+#root {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

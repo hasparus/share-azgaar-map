@@ -5,7 +5,7 @@ import { Column } from './Column';
 import { HtmlAttrs } from './HtmlAttrs';
 
 const className = css`
-    background: var(--yellow);
+    background: var(--primary);
     padding: 1em;
     width: 80vw;
     min-height: 300px;
@@ -15,15 +15,6 @@ const className = css`
 
   h1 {
     font-weight: normal;
-  }
-
-  a {
-    color: black;
-    font-family: inherit;
-
-    &:hover {
-      color: let(--blue);
-    }
   }
 `;
 
