@@ -46,7 +46,6 @@ button {
   border: 1px black solid;
   font-family: inherit;
   font-size: inherit;
-  margin: 1em 0;
   background: transparent;
   color: black;
 
@@ -60,37 +59,20 @@ button {
 }
 
 .button--big {
+  display: block;
   border-width: 2px;
   padding: 0.6em 1.2em;
   box-shadow: 6px 5px 0 0 black;
   text-transform: uppercase;
   transition: all 200ms ease-in-out;
 
+  height: 1em;
+  box-sizing: content-box;
+
   &:hover {
+    transform: translateY(3px);
     box-shadow: 1px 1px 0 0 black;
   }
-}
-
-.maps-grid {
-  display: flex;
-  flex-direction: row;
-  > * {
-    padding: 1em;
-    border: 0px dashed black;
-    border-right-width: 1px;
-    &:last-child {
-      border-right-width: 0px;
-    }
-  }
-}
-
-.footer {
-  position: absolute;
-  left: 0;
-  bottom: 1em;
-  display: flex;
-  justify-content: center;
-  width: 100%;
 }
 
 #root {
