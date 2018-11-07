@@ -1,6 +1,8 @@
 import { Component, h } from 'hyperapp';
 
+import { FeatherIcon } from '../FeatherIcon';
 import * as styles from '../styles';
+import { VisuallyHidden } from '../VisuallyHidden';
 
 import { AUTHENTICATION_URL } from './authenticationUrl';
 import { State } from './index';
@@ -20,7 +22,8 @@ export const AdminLoginLink: Component<
           }}
           href={AUTHENTICATION_URL}
         >
-          admin
+          <FeatherIcon kind="lock" aria-hidden />
+          <VisuallyHidden>admin</VisuallyHidden>
         </a>
       );
     case false:

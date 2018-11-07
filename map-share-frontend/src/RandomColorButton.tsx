@@ -10,7 +10,7 @@ export const RandomColorButton: Component = () => (
     className={classNames(styles.resetButton, styles.textButton)}
     onclick={styles.setRandomGlobalColors}
   >
-    <FeatherIcon kind="eye" />
+    <FeatherIcon kind="eye" aria-hidden />
     <VisuallyHidden>random color</VisuallyHidden>
   </button>
 );
