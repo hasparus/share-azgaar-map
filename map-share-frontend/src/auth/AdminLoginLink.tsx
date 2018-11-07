@@ -1,4 +1,3 @@
-import { css } from 'emotion';
 import { Component, h } from 'hyperapp';
 
 import * as styles from '../styles';
@@ -14,7 +13,13 @@ export const AdminLoginLink: Component<
   switch (st.auth.isAdmin) {
     case undefined:
       return (
-        <a className={styles.textButton} href={AUTHENTICATION_URL}>
+        <a
+          className={styles.textButton}
+          style={{
+            textDecoration: 'none',
+          }}
+          href={AUTHENTICATION_URL}
+        >
           admin
         </a>
       );
