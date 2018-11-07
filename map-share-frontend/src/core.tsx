@@ -10,6 +10,7 @@ import { ErrorMessage } from './ErrorMessage';
 import { Footer } from './Footer';
 import { MainContainer } from './MainContainer';
 import { Maps } from './Maps';
+import { RandomColorButton } from './RandomColorButton';
 import { openFileUploadDialog } from './utils/openFileUploadDialog';
 
 export const state = {
@@ -90,6 +91,7 @@ export const view: View<State, Actions> = (st, acts) => (
     <ErrorMessage msg={st.errorMsg} />
     <Footer>
       <auth.AdminLoginLink />
+      <RandomColorButton />
     </Footer>
   </Column>
 );

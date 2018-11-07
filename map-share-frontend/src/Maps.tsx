@@ -37,7 +37,7 @@ export const Maps: Component<{
     <h1 style={{ margin: '0.5em 0' }}>Maps</h1>
     <ul className={className}>
       {maps.map(map => (
-        <li>
+        <li key={map.path}>
           <MapLink {...map} />
           {deleteMaps && (
             <RemoveButton
