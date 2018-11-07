@@ -4,10 +4,10 @@ import { Map, SERVICE_URL } from '../../map-share-common';
 
 import { deleteFiles, uploadFiles } from './api';
 import * as auth from './auth';
-import { FEATURE_LOGIN } from './env';
+import { Buttons } from './Buttons';
 import { ErrorMessage } from './ErrorMessage';
+import { Footer } from './Footer';
 import { Maps } from './Maps';
-import { UploadButton } from './UploadButton';
 import { openFileUploadDialog } from './utils/openFileUploadDialog';
 
 export const state = {
@@ -77,28 +77,29 @@ export const actions = {
 export type Actions = typeof actions;
 
 export const view: View<State, Actions> = (st, acts) => (
-  <article>
-    <main>
+  <article
+    style={{
+      display: 'flex',
+      flexDirection: 'column',
+      maxHeight: '100%',
+    }}
+  >
+    <main
+      style={{
+        marginTop: '1em',
+        display: 'flex',
+        flexDirection: 'column',
+      }}
+    >
       <Maps
         maps={st.maps}
         deleteMaps={st.auth.isAdmin ? acts.deleteMaps : null}
       />
-      <section
-        style={{
-          position: 'absolute',
-          bottom: 0,
-          display: 'grid',
-          gridTemplateColumns: '1fr 1fr',
-          columnGap: '1em',
-        }}
-      >
-        <UploadButton onclick={acts.uploadMaps} />
-        {FEATURE_LOGIN && <auth.LoginButton />}
-      </section>
+      <Buttons />
     </main>
     <ErrorMessage msg={st.errorMsg} />
-    <footer className="footer">
+    <Footer>
       <auth.AdminLoginLink />
-    </footer>
+    </Footer>
   </article>
 );

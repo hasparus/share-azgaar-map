@@ -4,9 +4,6 @@ import { Component, h } from 'hyperapp';
 import { AUTHENTICATION_URL } from './authenticationUrl';
 
 const anchorButtonStyles = css`
-  -webkit-appearance: button;
-  -moz-appearance: button;
-  appearance: button;
   text-decoration: none;
 
   &:hover {
