@@ -1,12 +1,12 @@
-import * as CSS from 'csstype';
 import { h } from 'hyperapp';
 
 import { Map } from '../../map-share-common';
 
 import { Component } from './Component';
+import * as styles from './styles';
 
 export const MapLink: Component<Map> = ({ path, temporaryLink }) => (
-  <a href={temporaryLink} key={path} title={path}>
+  <a className={styles.textButton} href={temporaryLink} title={path}>
     {path}
   </a>
 );

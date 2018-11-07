@@ -1,19 +1,10 @@
 import { css } from 'emotion';
 import { Component, h } from 'hyperapp';
 
+import * as styles from '../styles';
+
 import { AUTHENTICATION_URL } from './authenticationUrl';
 import { State } from './index';
-
-const adminLoginLinkStyles = css`
-  font-size: 0.6em;
-  color: #333;
-  text-decoration: none;
-
-  &:hover {
-    color: #333;
-    text-decoration: underline;
-  }
-`;
 
 export type AdminLoginLinkAttrs = {};
 export const AdminLoginLink: Component<
@@ -23,7 +14,7 @@ export const AdminLoginLink: Component<
   switch (st.auth.isAdmin) {
     case undefined:
       return (
-        <a className={adminLoginLinkStyles} href={AUTHENTICATION_URL}>
+        <a className={styles.textButton} href={AUTHENTICATION_URL}>
           admin
         </a>
       );

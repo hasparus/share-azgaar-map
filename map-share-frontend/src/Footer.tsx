@@ -2,17 +2,28 @@ import { css } from 'emotion';
 import { h, VNode } from 'hyperapp';
 
 import { Component } from './Component';
-import { classNames } from './utils/classNames';
 
-const className = css`
+const footerStyle = css`
   bottom: 1em;
   margin: 1em;
   display: flex;
   justify-content: center;
 `;
 
-export const Footer: Component<{}> = (attrs, children) => (
-  <footer className={className} {...attrs}>
-    {children}
+const footerItemStyle = css`
+  :not(:first-child) {
+    border-left: 1px dashed currentColor;
+  }
+  padding: 0 1em;
+  font-size: 0.6em;
+  color: #333;
+  text-decoration: none;
+`;
+
+export const Footer: Component = (attrs, children) => (
+  <footer className={footerStyle} {...attrs}>
+    {children.map(child => (
+      <div className={footerItemStyle}>{child}</div>
+    ))}
   </footer>
 );

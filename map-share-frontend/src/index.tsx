@@ -3,8 +3,8 @@ import { app } from 'hyperapp';
 import { handleAuthQueryString } from './auth';
 import { Actions, actions, State, state, view } from './core';
 
-// tslint:disable-next-line:no-import-side-effect
-import './styles.scss';
+import { setRandomGlobalColors } from './styles';
+setRandomGlobalColors();
 
 const appArgs: [State, Actions, typeof view, HTMLElement | null] = [
   state,
