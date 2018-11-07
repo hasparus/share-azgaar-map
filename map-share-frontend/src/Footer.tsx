@@ -19,6 +19,11 @@ const footerItemStyle = css`
   font-size: 0.6em;
   color: #333;
   text-decoration: none;
+  display: flex;
+
+  > * {
+    color: inherit;
+  }
 `;
 
 export const Footer: Component = (attrs, children) => (
