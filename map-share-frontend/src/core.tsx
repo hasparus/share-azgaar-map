@@ -5,8 +5,10 @@ import { Map, SERVICE_URL } from '../../map-share-common';
 import { deleteFiles, uploadFiles } from './api';
 import * as auth from './auth';
 import { Buttons } from './Buttons';
+import { Column } from './Column';
 import { ErrorMessage } from './ErrorMessage';
 import { Footer } from './Footer';
+import { MainContainer } from './MainContainer';
 import { Maps } from './Maps';
 import { openFileUploadDialog } from './utils/openFileUploadDialog';
 
@@ -77,29 +79,17 @@ export const actions = {
 export type Actions = typeof actions;
 
 export const view: View<State, Actions> = (st, acts) => (
-  <article
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      maxHeight: '100%',
-    }}
-  >
-    <main
-      style={{
-        marginTop: '1em',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
+  <Column style={{ maxHeight: '100%' }}>
+    <MainContainer>
       <Maps
         maps={st.maps}
         deleteMaps={st.auth.isAdmin ? acts.deleteMaps : null}
       />
       <Buttons />
-    </main>
+    </MainContainer>
     <ErrorMessage msg={st.errorMsg} />
     <Footer>
       <auth.AdminLoginLink />
     </Footer>
-  </article>
+  </Column>
 );

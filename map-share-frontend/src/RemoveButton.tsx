@@ -6,4 +6,8 @@ import { Component } from './Component';
 export const RemoveButton: Component<{
   style: CSS.Properties;
   onclick: HTMLButtonElement['onclick'];
-}> = attrs => <button {...attrs}>x</button>;
+}> = attrs => (
+  <button className="button" {...attrs}>
+    x
+  </button>
+);

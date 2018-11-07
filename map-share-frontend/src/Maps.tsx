@@ -3,6 +3,7 @@ import { Component, h } from 'hyperapp';
 
 import { Map } from '../../map-share-common';
 
+import { Column } from './Column';
 import { Actions } from './core';
 import { MapLink } from './MapLink';
 import { RemoveButton } from './RemoveButton';
@@ -15,6 +16,7 @@ const className = css`
   flex-wrap: wrap;
   list-style: none;
   overflow: hidden auto;
+  align-items: flex-start;
 
   margin: 0;
   padding: 0;
@@ -31,13 +33,7 @@ export const Maps: Component<{
   maps: Map[];
   deleteMaps: null | Actions['deleteMaps'];
 }> = ({ maps, deleteMaps }) => (
-  <section
-    style={{
-      display: 'flex',
-      flexDirection: 'column',
-      flex: 1,
-    }}
-  >
+  <Column style={{ flex: 1 }}>
     <h1 style={{ margin: '0.5em 0' }}>Maps</h1>
     <ul className={className}>
       {maps.map(map => (
@@ -54,5 +50,5 @@ export const Maps: Component<{
         </li>
       ))}
     </ul>
-  </section>
+  </Column>
 );
