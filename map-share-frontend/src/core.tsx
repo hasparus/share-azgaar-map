@@ -106,7 +106,7 @@ export const view: View<State, Actions> = (st, acts) => (
           <div key="1">
             <span>Couldn't fetch maps.</span>
             <button
-              class={classNames(styles.resetButton, styles.textButton)}
+              class={classNames(styles.resetButton, styles.flatButton)}
               style={{
                 textDecoration: 'underline',
               }}

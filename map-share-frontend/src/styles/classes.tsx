@@ -1,6 +1,6 @@
 import { css, cx } from 'emotion';
 
-export const textButton = css`
+export const flatButton = css`
   color: black;
   font-family: inherit;
   padding: 2px 5px;
