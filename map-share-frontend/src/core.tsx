@@ -11,11 +11,21 @@ import { Footer } from './Footer';
 import { MainContainer } from './MainContainer';
 import { Maps } from './Maps';
 import { RandomColorButton } from './RandomColorButton';
+import * as styles from './styles';
+import { classNames } from './utils/classNames';
 import { openFileUploadDialog } from './utils/openFileUploadDialog';
+
+const enum MapsStatus {
+  None,
+  Pending,
+  Success,
+  Failed,
+}
 
 export const state = {
   ...auth.state,
   maps: [] as Map[],
+  mapsStatus: MapsStatus.None,
   errorMsg: null as string | null,
 };
 
@@ -27,12 +37,15 @@ export const actions = {
     return diff;
   },
   getMaps: () => async (_: State, acts: Actions) => {
+    acts.setState({
+      mapsStatus: MapsStatus.Pending,
+    });
     try {
       const response = await fetch(SERVICE_URL);
       if (response.ok) {
         const { maps } = await response.json();
         if (Array.isArray(maps)) {
-          acts.setState({ maps });
+          acts.setState({ maps, mapsStatus: MapsStatus.Success });
         } else {
           acts.setState({
             errorMsg: `Couldn't fetch maps: ${response.status}`,
@@ -42,6 +55,7 @@ export const actions = {
     } catch (err) {
       acts.setState({
         errorMsg: err.toString(),
+        mapsStatus: MapsStatus.Failed,
       });
     }
   },
@@ -86,9 +100,26 @@ export const view: View<State, Actions> = (st, acts) => (
         maps={st.maps}
         deleteMaps={st.auth.isAdmin ? acts.deleteMaps : null}
       />
+      {st.mapsStatus === MapsStatus.Pending && 'Fetching maps...'}
+      {st.mapsStatus === MapsStatus.Failed && (
+        <section>
+          <div key="1">
+            <span>Couldn't fetch maps.</span>
+            <button
+              class={classNames(styles.resetButton, styles.textButton)}
+              style={{
+                textDecoration: 'underline',
+              }}
+              onclick={acts.getMaps}
+            >
+              Try again?
+            </button>
+          </div>
+          <ErrorMessage msg={st.errorMsg} />
+        </section>
+      )}
       <Buttons />
     </MainContainer>
-    <ErrorMessage msg={st.errorMsg} />
     <Footer>
       <auth.AdminLoginLink />
       <RandomColorButton />
