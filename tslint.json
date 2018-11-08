@@ -19,6 +19,7 @@
     "export-name": false,
     "no-namespace": [true, "allow-declarations"],
     "interface-name": [true, "never-prefix"],
-    "max-union-size": false
+    "max-union-size": false,
+    "no-suspicious-comment": false // "We recommend that you run this rule before each release as a quality checkpoint."
   }
 }

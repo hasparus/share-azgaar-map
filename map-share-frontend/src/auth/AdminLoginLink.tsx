@@ -1,5 +1,6 @@
 import { Component, h } from 'hyperapp';
 
+import { AccessibleIcon } from '../AccessibleIcon';
 import { FeatherIcon } from '../FeatherIcon';
 import * as styles from '../styles';
 import { VisuallyHidden } from '../VisuallyHidden';
@@ -15,29 +16,22 @@ export const AdminLoginLink: Component<
   switch (st.auth.isAdmin) {
     case undefined:
       return (
+        // tslint:disable-next-line:react-a11y-anchors -- false positive
         <a
           className={styles.textButton}
           style={{
             textDecoration: 'none',
           }}
           href={AUTHENTICATION_URL}
+          title="login as admin"
         >
-          <FeatherIcon kind="lock" aria-hidden />
-          <VisuallyHidden>admin</VisuallyHidden>
+          <AccessibleIcon kind="unlock" label="admin" />
         </a>
       );
     case false:
       return null;
     case true:
-      return (
-        <span
-          style={{
-            fontSize: '0.6em',
-          }}
-        >
-          logged in
-        </span>
-      );
+      return <span>logged in</span>;
     default:
       throw Error('invalid state');
   }
