@@ -1,15 +1,14 @@
-import * as CSS from 'csstype';
 import { h } from 'hyperapp';
 
+import { AccessibleIcon } from './AccessibleIcon';
 import { Component } from './Component';
-import * as styles from './styles';
-import { classNames } from './utils/classNames';
+import { ButtonAttrs, FlatButton } from './FlatButton';
 
-export const RemoveButton: Component<{
-  style: CSS.Properties;
-  onclick: HTMLButtonElement['onclick'];
-}> = attrs => (
-  <button className={styles.buttonElevated} {...attrs}>
-    x
-  </button>
+export const RemoveButton: Component<ButtonAttrs> = ({
+  className,
+  ...rest
+}) => (
+  <FlatButton className={className} title="remove map" {...rest}>
+    <AccessibleIcon kind="trashcan" label="remove map" />
+  </FlatButton>
 );

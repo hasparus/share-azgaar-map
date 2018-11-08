@@ -1,19 +1,11 @@
 import { dataTransfer } from '../../map-share-common';
 
-import { makeMapUrl } from './makeMapUrl';
-
-export async function makeDataTransferMaps(
+export function makeDataTransferMaps(
   maps: { path_lower?: string }[]
-): Promise<dataTransfer.Maps> {
-  const mapUrls = await Promise.all(
-    // tslint:disable-next-line:no-non-null-assertion
-    maps.map(file => makeMapUrl(file.path_lower!))
-  );
-
+): dataTransfer.Maps {
   return {
-    maps: maps.map((file, index) => ({
+    maps: maps.map(file => ({
       path: file.path_lower || '?',
-      temporaryLink: mapUrls[index],
     })),
   };
 }

@@ -18,7 +18,7 @@ export const AdminLoginLink: Component<
       return (
         // tslint:disable-next-line:react-a11y-anchors -- false positive
         <a
-          className={styles.textButton}
+          className={styles.flatButton}
           style={{
             textDecoration: 'none',
           }}

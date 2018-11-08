@@ -3,7 +3,8 @@
   "compilerOptions": {
     "rootDir": "./src",
     "jsx": "react",
-    "jsxFactory": "h"
+    "jsxFactory": "h",
+    "strict": true
   },
   "references": [
     {

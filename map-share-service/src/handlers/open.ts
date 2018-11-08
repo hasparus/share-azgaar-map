@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http';
 import { send } from 'micro';
 
-import { makeMapUrl } from '../makeMapUrl';
+import { makeGeneratorMapUrl } from '../makeMapUrl';
 
 const HTTP_FOUND = 302;
 
@@ -12,7 +12,7 @@ export const openHandler = (
   path: string
 ) => {
   if (path) {
-    makeMapUrl(path)
+    makeGeneratorMapUrl(path)
       .then(url => {
         res.writeHead(HTTP_FOUND, {
           Location: url,

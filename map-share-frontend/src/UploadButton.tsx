@@ -2,7 +2,6 @@ import { h } from 'hyperapp';
 
 import { Component } from './Component';
 import * as styles from './styles';
-import { classNames } from './utils/classNames';
 
 type Attrs = {
   onclick(): void;
