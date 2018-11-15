@@ -22,7 +22,7 @@
     "camelcase": "5.0.0",
     "copy-to-clipboard": "3.0.8",
     "csstype": "2.5.7",
-    "dropbox": "4.0.12",
+    "dropbox": "4.0.13",
     "emotion": "9.2.12",
     "hyperapp": "jorgebucaran/hyperapp.git#0d23a35a65b23e8dfa5cac15d3d166bac18d51b1",
     "hyperapp-redux-devtools": "1.1.6",
