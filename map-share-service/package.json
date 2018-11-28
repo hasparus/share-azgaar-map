@@ -19,7 +19,7 @@
     "@types/micro": "7.3.3",
     "@types/micro-cors": "0.1.0",
     "@types/node": "10.12.8",
-    "concurrently": "4.0.1",
+    "concurrently": "4.1.0",
     "forever": "0.15.3",
     "micro-dev": "3.0.0",
     "sass": "1.15.1",
