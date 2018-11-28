@@ -22,7 +22,7 @@
     "concurrently": "4.0.1",
     "forever": "0.15.3",
     "micro-dev": "3.0.0",
-    "sass": "1.15.0",
+    "sass": "1.15.1",
     "typescript": "3.1.6"
   },
   "dependencies": {
