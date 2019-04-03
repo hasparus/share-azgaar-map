@@ -1443,10 +1443,10 @@ caller@~0.0.1:
   dependencies:
     tape "~2.3.2"
 
-camelcase@5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.0.0.tgz#03295527d58bd3cd4aa75363f35b2e8d97be2f42"
-  integrity sha512-faqwZqnWxbxn+F1d399ygeamQNy3lPp/H9H6rNrqYh4FSVCtcY+3cub1MxA8o9mDd55mM8Aghuu/kuyYA6VTsA==
+camelcase@5.3.1:
+  version "5.3.1"
+  resolved "https://registry.yarnpkg.com/camelcase/-/camelcase-5.3.1.tgz#e3c9b31569e106811df242f715725a1f4c494320"
+  integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 camelcase@^4.0.0, camelcase@^4.1.0:
   version "4.1.0"
@@ -5814,10 +5814,10 @@ safer-eval@^1.2.3:
   dependencies:
     clones "^1.1.0"
 
-sass@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.15.0.tgz#80cd374ad9db9f4a24942cf927552d31d8b6f376"
-  integrity sha512-xY+n0MB/KAjwwNJYXBD5yJOG2mS2Ac8AXB7Ci2KbWxivbiDVMxhy3vbvXAllVABAHjBqZYUPq1qOJeqZ2XMVIQ==
+sass@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.15.1.tgz#25a03f6813413540210580b670628360c36267d3"
+  integrity sha512-WiDa5BsePB/rQEbh/Fv2pVDUCasxuRYjW7GsWx8Ld23LY61vx1VV5Mzf/7mu5kLWKMryMqo65fzYL34HgaM47w==
   dependencies:
     chokidar "^2.0.0"
 
