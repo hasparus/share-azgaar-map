@@ -1,3 +1,4 @@
 {
-  "alias": ["map-share-service.now.sh"]
+  "alias": ["map-share-service.now.sh"],
+  "version": 1
 }
