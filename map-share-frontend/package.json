@@ -10,9 +10,9 @@
   },
   "devDependencies": {
     "@types/camelcase": "4.1.0",
-    "@types/ramda": "0.25.39",
+    "@types/ramda": "0.25.42",
     "babel-core": "6.26.3",
-    "babel-plugin-emotion": "9.2.11",
+    "babel-plugin-emotion": "10.0.0",
     "csstype": "2.5.7",
     "executive": "1.6.3",
     "hyperapp-redux-devtools": "1.1.6",
@@ -21,13 +21,13 @@
   },
   "dependencies": {
     "camelcase": "5.0.0",
-    "copy-to-clipboard": "^3.0.8",
+    "copy-to-clipboard": "3.0.8",
     "csstype": "2.5.7",
-    "dropbox": "4.0.12",
-    "emotion": "9.2.12",
+    "dropbox": "4.0.13",
+    "emotion": "10.0.0",
     "hyperapp": "jorgebucaran/hyperapp.git#0d23a35a65b23e8dfa5cac15d3d166bac18d51b1",
     "hyperapp-redux-devtools": "1.1.6",
     "json5": "2.1.0",
-    "ramda": "0.25.0"
+    "ramda": "0.26.1"
   }
 }
