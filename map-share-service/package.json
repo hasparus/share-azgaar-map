@@ -29,7 +29,7 @@
     "@types/express-fileupload": "0.4.0",
     "dropbox": "4.0.13",
     "isomorphic-fetch": "2.2.1",
-    "micro": "9.3.3",
+    "micro": "9.3.4",
     "micro-cors": "0.1.1",
     "micro-upload": "1.0.1"
   }
