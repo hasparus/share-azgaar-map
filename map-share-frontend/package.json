@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "camelcase": "5.0.0",
-    "copy-to-clipboard": "3.0.8",
+    "copy-to-clipboard": "3.2.0",
     "csstype": "2.5.7",
     "dropbox": "4.0.13",
     "emotion": "10.0.0",
