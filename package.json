@@ -17,7 +17,7 @@
     "azgaars-map-generator"
   ],
   "devDependencies": {
-    "concurrently": "4.1.0",
+    "concurrently": "4.1.2",
     "cross-env": "5.2.0",
     "tslint": "5.11.0",
     "tslint-config-prettier": "1.17.0",
