@@ -2163,7 +2163,12 @@ csso@~2.3.1:
     clap "^1.0.9"
     source-map "^0.5.3"
 
-csstype@2.5.7, csstype@^2.5.7:
+csstype@2.6.7:
+  version "2.6.7"
+  resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.7.tgz#20b0024c20b6718f4eda3853a1f5a1cce7f5e4a5"
+  integrity sha512-9Mcn9sFbGBAdmimWb2gLVDtFJzeKtDGIr76TUqmjZrw9LFXBMSU70lcs+C0/7fyCd6iBDqmksUcCOUIkisPHsQ==
+
+csstype@^2.5.7:
   version "2.5.7"
   resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.5.7.tgz#bf9235d5872141eccfb2d16d82993c6b149179ff"
   integrity sha512-Nt5VDyOTIIV4/nRFswoCKps1R5CD1hkiyjBE9/thNaNZILLEviVw9yWQw15+O+CpNjQKB/uvdcxFFOrSflY3Yw==
@@ -5814,10 +5819,10 @@ safer-eval@^1.2.3:
   dependencies:
     clones "^1.1.0"
 
-sass@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.15.0.tgz#80cd374ad9db9f4a24942cf927552d31d8b6f376"
-  integrity sha512-xY+n0MB/KAjwwNJYXBD5yJOG2mS2Ac8AXB7Ci2KbWxivbiDVMxhy3vbvXAllVABAHjBqZYUPq1qOJeqZ2XMVIQ==
+sass@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.15.1.tgz#25a03f6813413540210580b670628360c36267d3"
+  integrity sha512-WiDa5BsePB/rQEbh/Fv2pVDUCasxuRYjW7GsWx8Ld23LY61vx1VV5Mzf/7mu5kLWKMryMqo65fzYL34HgaM47w==
   dependencies:
     chokidar "^2.0.0"
 
