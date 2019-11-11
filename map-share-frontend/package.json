@@ -16,7 +16,7 @@
     "csstype": "2.5.7",
     "executive": "1.6.3",
     "hyperapp-redux-devtools": "1.1.6",
-    "parcel": "1.10.3",
+    "parcel": "1.12.4",
     "typescript": "3.1.6"
   },
   "dependencies": {
