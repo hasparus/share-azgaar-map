@@ -18,7 +18,7 @@
     "@types/isomorphic-fetch": "0.0.34",
     "@types/micro": "7.3.3",
     "@types/micro-cors": "0.1.0",
-    "@types/node": "10.12.8",
+    "@types/node": "10.17.5",
     "concurrently": "4.1.0",
     "forever": "0.15.3",
     "micro-dev": "3.0.0",
