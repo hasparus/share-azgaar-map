@@ -787,10 +787,12 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.12.8.tgz#d0a3ab5a6e61458c492304e2776ac136b81db927"
   integrity sha512-INamyRZG4rW3lDCUmwVd5Xho/bXvQm/v1yP8V0UN1RuInU7RoWoaO570b+yLX4Ia/0szsx1wa8VzcsVlsvbWLA==
 
-"@types/ramda@0.25.42":
-  version "0.25.42"
-  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.25.42.tgz#bec6e54e168409f120a753621edf20cf4d1a4c08"
-  integrity sha512-m8IcEWgJZTb47UARqp2d58f+C8yDxpTC6ElU/muO0z1bYhdgf6LHcO2SE9f1Mt3SJnKCh6GtjKEC99hq6vPnDA==
+"@types/ramda@0.26.33":
+  version "0.26.33"
+  resolved "https://registry.yarnpkg.com/@types/ramda/-/ramda-0.26.33.tgz#5fd1f22381ccf913a3627beb16f468fb57f82d94"
+  integrity sha512-sUCQmKfAWmlbb6PpFqvndbGgTf0bCcmHLJqMYw8ErVS0UoZTTiz952aFedJhV+JERiVH7poh33358c7p0AAN8A==
+  dependencies:
+    ts-toolbelt "^4.7.7"
 
 "@types/range-parser@*":
   version "1.2.2"
@@ -5814,10 +5816,10 @@ safer-eval@^1.2.3:
   dependencies:
     clones "^1.1.0"
 
-sass@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/sass/-/sass-1.15.0.tgz#80cd374ad9db9f4a24942cf927552d31d8b6f376"
-  integrity sha512-xY+n0MB/KAjwwNJYXBD5yJOG2mS2Ac8AXB7Ci2KbWxivbiDVMxhy3vbvXAllVABAHjBqZYUPq1qOJeqZ2XMVIQ==
+sass@1.15.1:
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/sass/-/sass-1.15.1.tgz#25a03f6813413540210580b670628360c36267d3"
+  integrity sha512-WiDa5BsePB/rQEbh/Fv2pVDUCasxuRYjW7GsWx8Ld23LY61vx1VV5Mzf/7mu5kLWKMryMqo65fzYL34HgaM47w==
   dependencies:
     chokidar "^2.0.0"
 
@@ -6452,6 +6454,11 @@ trim-right@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/trim-right/-/trim-right-1.0.1.tgz#cb2e1203067e0c8de1f614094b9fe45704ea6003"
   integrity sha1-yy4SAwZ+DI3h9hQJS5/kVwTqYAM=
+
+ts-toolbelt@^4.7.7:
+  version "4.10.7"
+  resolved "https://registry.yarnpkg.com/ts-toolbelt/-/ts-toolbelt-4.10.7.tgz#3d076afb0e99209cbde458960b253091040c6808"
+  integrity sha512-4YDe0TWABZ4i8am1Bup0dwGii7c1rffZ7MXE7q4kmG+ixeiKUAnaaO75iBrw04v6vJg/VookQ0yOdDD0DEQhHA==
 
 tslib@^1.8.0, tslib@^1.8.1, tslib@^1.9.0:
   version "1.9.3"
