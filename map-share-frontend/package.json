@@ -17,7 +17,7 @@
     "executive": "1.6.3",
     "hyperapp-redux-devtools": "1.1.6",
     "parcel": "1.10.3",
-    "typescript": "3.1.6"
+    "typescript": "3.7.2"
   },
   "dependencies": {
     "camelcase": "5.0.0",
